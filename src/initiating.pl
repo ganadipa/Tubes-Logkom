@@ -39,26 +39,6 @@ rollDiceForPlayers([Player | Rest]) :-
     updateMaxDice(DiceRoll),
     updateTie(Player, DiceRoll).
 
-% nilai dadu maksimal
-updateMaxDice(DiceRoll) :-
-    maxDice(Max),
-    DiceRoll > Max,
-    retract(maxDice(Max)),
-    asserta(maxDice(DiceRoll)), !.
-updateMaxDice(DiceRoll) :-
-    maxDice(Max),
-    DiceRoll =< Max, !.
-updateMaxDice(DiceRoll) :-
-    asserta(maxDice(DiceRoll)).
-
-% cek dadu seri
-updateTie(Player, DiceRoll) :-
-    maxDice(Max),
-    DiceRoll = Max,
-    retractall(tie(_)),
-    asserta(tie(Player)), !.
-updateTie(_, _).
-
 % cek jika ada dadu terbesar yang sama
 checkTie :-
     findall(Player, tie(Player), Ties),
@@ -82,19 +62,19 @@ rollDiceForTie :-
 % urutan pemain
 sortPlayers :-
     findall(Dice-Name, dice(Name, Dice), Pairs),
-    keysort(Pairs, SortedPairs),
-    reverse(SortedPairs, ReversedPairs),
+    keysort(Pairs, NewPairs),
+    reverse(NewPairs, SortedPairs),
     findall(Winner, winner(Winner), Winners),
     (Winners = [SingleWinner] -> Winner = SingleWinner; Winner = Winners),
     write('\n'),
     write('Urutan pemain berdasarkan nilai dadu: '),
-    printPlayerNames(ReversedPairs, Winner),
+    printPlayerNames(SortedPairs, Winner),
     write('\n').
 
 % print urutan pemain dan urutan pertama
 printPlayerNames([], Winner) :-
     write('.\n'),
-    write('Pemenang lemparan dadu adalah '), write(Winner), write('.\n').
+    write(Winner), write(' dapat mulai terlebih dahulu.'), write('\n').
 
 printPlayerNames([Dice-Name | Tail], Winner) :-
     format('~w', [Name]),
@@ -107,6 +87,10 @@ printTroops :-
     length(Players, NumPlayers),
     calculateTroops(NumPlayers, Troops),
     format('Setiap pemain mendapatkan ~w Troops.', [Troops]).
+
+% print first turn
+printFirstTurn(Winner) :-
+    format('Giliran ~w untuk memilih wilayahnya.', [Winner]).
 
 calculateTroops(2, 24) :- !.
 calculateTroops(3, 16) :- !.
@@ -121,4 +105,8 @@ startGame :-
     rollDiceForPlayers,
     checkTie,
     sortPlayers,
-    printTroops.
+    printTroops,
+    write('\n'),
+    findall(Winner, winner(Winner), Winners),
+    (Winners = [SingleWinner] -> Winner = SingleWinner; Winner = Winners),
+    printFirstTurn(Winner).
