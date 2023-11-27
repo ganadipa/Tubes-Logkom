@@ -44,7 +44,7 @@ checkTie :-
     findall(Player, tie(Player), Ties),
     length(Ties, N),
     N > 1,
-    rollDiceForTie, !.
+    rollDiceForPlayers, !.
 checkTie :-
     findall(Player, tie(Player), Ties),
     length(Ties, N),
@@ -53,11 +53,11 @@ checkTie :-
     asserta(winner(Winner)).
 
 % kocok ulang dadu
-rollDiceForTie :-
-    retractall(dice(_, _)),
-    retractall(maxDice(_)),
-    retractall(tie(_)),
-    forall(tie(Player), (rollDiceForPlayer(Player), checkTie)).
+% rollDiceForTie :-
+%     retractall(dice(_, _)),
+%     retractall(maxDice(_)),
+%     retractall(tie(_)),
+%     forall(tie(Player), (rollDiceForPlayer(Player), checkTie)).
 
 % urutan pemain
 sortPlayers :-
