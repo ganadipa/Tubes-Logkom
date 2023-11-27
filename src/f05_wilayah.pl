@@ -3,69 +3,10 @@
 
 
 
-kode(na1, 'NA1').
-kode(na2, 'NA2').
-kode(na3, 'NA3').
-kode(na4, 'NA4').
 
-kode(sa1, 'SA1').
-kode(sa2, 'SA2').
-
-kode(af1, 'AF1').
-kode(af2, 'AF2').
-kode(af3, 'AF3').
-
-kode(af1, 'AF1').
-kode(af2, 'AF2').
-kode(af3, 'AF3').
-
-kode(a1, 'A1').
-kode(a2, 'A2').
-kode(a3, 'A3').
-kode(a4, 'A4').
-kode(a5, 'A5').
-kode(a6, 'A6').
-kode(a7, 'A7').
-
-kode(au1, 'AU1').
-kode(au2, 'AU2').
-
-kode(e1, 'E1').
-kode(e2, 'E2').
-kode(e3, 'E3').
-kode(e4, 'E4').
-kode(e5, 'E5').
 
 kode(a, 'A1').
 
-benua(na1, 'Amerika Utara').
-benua(na2, 'Amerika Utara').
-benua(na3, 'Amerika Utara').
-benua(na4, 'Amerika Utara').
-
-benua(sa1, 'Amerika Selatan').
-benua(sa2, 'Amerika Selatan').
-
-benua(af1, 'Afrika').
-benua(af2, 'Afrika').
-benua(af3, 'Afrika').
-
-benua(au1, 'Australia').
-benua(au2, 'Australia').
-
-benua(a1, 'Asia').
-benua(a2, 'Asia').
-benua(a3, 'Asia').
-benua(a4, 'Asia').
-benua(a5, 'Asia').
-benua(a6, 'Asia').
-benua(a7, 'Asia').
-
-benua(e1, 'Eropa').
-benua(e2, 'Eropa').
-benua(e3, 'Eropa').
-benua(e4, 'Eropa').
-benua(e5, 'Eropa').
 
 nama(na1, 'Greenland').
 nama(na1, 'Kanada').

@@ -140,3 +140,65 @@ tetangga(au1,au2).
 tetangga(au2,au1).
 tetangga(au2,sa2).
 tetangga(sa2,au2).
+
+kode(na1, 'NA1').
+kode(na2, 'NA2').
+kode(na3, 'NA3').
+kode(na4, 'NA4').
+
+kode(sa1, 'SA1').
+kode(sa2, 'SA2').
+
+kode(af1, 'AF1').
+kode(af2, 'AF2').
+kode(af3, 'AF3').
+
+kode(af1, 'AF1').
+kode(af2, 'AF2').
+kode(af3, 'AF3').
+
+kode(a1, 'A1').
+kode(a2, 'A2').
+kode(a3, 'A3').
+kode(a4, 'A4').
+kode(a5, 'A5').
+kode(a6, 'A6').
+kode(a7, 'A7').
+
+kode(au1, 'AU1').
+kode(au2, 'AU2').
+
+kode(e1, 'E1').
+kode(e2, 'E2').
+kode(e3, 'E3').
+kode(e4, 'E4').
+kode(e5, 'E5').
+
+dari_dari_benua(na1, 'Amerika Utara').
+dari_benua(na2, 'Amerika Utara').
+dari_benua(na3, 'Amerika Utara').
+dari_benua(na4, 'Amerika Utara').
+
+dari_benua(sa1, 'Amerika Selatan').
+dari_benua(sa2, 'Amerika Selatan').
+
+dari_benua(af1, 'Afrika').
+dari_benua(af2, 'Afrika').
+dari_benua(af3, 'Afrika').
+
+dari_benua(au1, 'Australia').
+dari_benua(au2, 'Australia').
+
+dari_benua(a1, 'Asia').
+dari_benua(a2, 'Asia').
+dari_benua(a3, 'Asia').
+dari_benua(a4, 'Asia').
+dari_benua(a5, 'Asia').
+dari_benua(a6, 'Asia').
+dari_benua(a7, 'Asia').
+
+dari_benua(e1, 'Eropa').
+dari_benua(e2, 'Eropa').
+dari_benua(e3, 'Eropa').
+dari_benua(e4, 'Eropa').
+dari_benua(e5, 'Eropa').
