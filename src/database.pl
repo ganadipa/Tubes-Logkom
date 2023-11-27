@@ -174,31 +174,10 @@ kode(e3, 'E3').
 kode(e4, 'E4').
 kode(e5, 'E5').
 
-dari_benua(na1, 'Amerika Utara').
-dari_benua(na2, 'Amerika Utara').
-dari_benua(na3, 'Amerika Utara').
-dari_benua(na4, 'Amerika Utara').
+benua_to_string(amerika_utara, 'Amerika Utara').
+benua_to_string(amerika_selatan, 'Amerika Selatan').
+benua_to_string(eropa, 'Eropa').
+benua_to_string(afrika, 'Afrika').
+benua_to_string(asia, 'Asia').
+benua_to_string(australia, 'Australia').
 
-dari_benua(sa1, 'Amerika Selatan').
-dari_benua(sa2, 'Amerika Selatan').
-
-dari_benua(af1, 'Afrika').
-dari_benua(af2, 'Afrika').
-dari_benua(af3, 'Afrika').
-
-dari_benua(au1, 'Australia').
-dari_benua(au2, 'Australia').
-
-dari_benua(a1, 'Asia').
-dari_benua(a2, 'Asia').
-dari_benua(a3, 'Asia').
-dari_benua(a4, 'Asia').
-dari_benua(a5, 'Asia').
-dari_benua(a6, 'Asia').
-dari_benua(a7, 'Asia').
-
-dari_benua(e1, 'Eropa').
-dari_benua(e2, 'Eropa').
-dari_benua(e3, 'Eropa').
-dari_benua(e4, 'Eropa').
-dari_benua(e5, 'Eropa').
