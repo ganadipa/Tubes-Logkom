@@ -8,11 +8,6 @@
 kode(a, 'A1').
 
 
-nama(na1, 'Greenland').
-nama(na1, 'Kanada').
-nama(na1, 'Mexico').
-nama(na1, 'Amerika Serikat').
-
 nama(a, 'Indonesia').
 
 tetangga(a, 'A').

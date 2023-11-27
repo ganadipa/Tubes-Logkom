@@ -181,3 +181,28 @@ benua_to_string(afrika, 'Afrika').
 benua_to_string(asia, 'Asia').
 benua_to_string(australia, 'Australia').
 
+nama_wilayah(na1, 'Greenland').
+nama_wilayah(na2, 'Ontario').
+nama_wilayah(na3, 'Yucatan'). 
+nama_wilayah(na4, 'California').
+
+nama_wilayah(sa1, 'Amazonas').     
+nama_wilayah(sa2, 'Patagonia').
+
+nama_wilayah(e1, 'Tuscany').
+nama_wilayah(e2, 'Bavaria').
+nama_wilayah(e3, 'Cornwall').
+nama_wilayah(e4, 'Normandy').
+nama_wilayah(e5, 'Friesland').
+
+nama_wilayah(af1, 'Gauteng').      
+nama_wilayah(af2, 'Lagos').        
+nama_wilayah(af3, 'Casablanca').   
+
+nama_wilayah(a1, 'Bali').          
+nama_wilayah(a2, 'Phuket').        
+nama_wilayah(a3, 'Jeju').          
+nama_wilayah(a4, 'Hokkaido').      
+
+nama_wilayah(au1, 'Queensland').   
+nama_wilayah(au2, 'South Island'). 
