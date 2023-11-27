@@ -174,7 +174,7 @@ kode(e3, 'E3').
 kode(e4, 'E4').
 kode(e5, 'E5').
 
-dari_dari_benua(na1, 'Amerika Utara').
+dari_benua(na1, 'Amerika Utara').
 dari_benua(na2, 'Amerika Utara').
 dari_benua(na3, 'Amerika Utara').
 dari_benua(na4, 'Amerika Utara').
