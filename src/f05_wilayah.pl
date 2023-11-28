@@ -21,41 +21,10 @@ total_tentara(a, 100).
 total_wilayah(a)
 
 
-
-writeTetangga(X) :-
-    tetangga(X, FirstNeighbor),
-    write(FirstNeighbor),
-    writeRestNeighbors(X, FirstNeighbor),
-    write('.').
-
-writeRestNeighbors(X, PrevNeighbor) :-
-    tetangga(X, Neighbor),
-    Neighbor \= PrevNeighbor,
-    write(', '),
-    write(Neighbor),
-    fail.
-
-writeRestNeighbors(_, _).
-
 player_to_string(p2, 'P2').
 
 
-checkLocationDetail(Kode):-
 
-    write('Kode              :  '),
-    kode(Kode, X),
-    write(X),
-    write('\nNama              :  '),
-    nama(Kode,Y),
-    write(Y),
-    write('\nPemilik           :  '),
-    pemilik(Kode,Z),
-    write(Z),
-    write('\nTotal Tentara     :  '),
-    total_tentara(Kode, W),
-    write(W),
-    write('\nTetangga          :  '),
-    writeTetangga(Kode).
 
 pemain(p2, 'Azmi').
 
