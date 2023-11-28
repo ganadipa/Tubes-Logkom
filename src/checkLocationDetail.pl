@@ -1,21 +1,4 @@
-
-
-
-writeTetangga(X) :-
-    tetangga(X, FirstNeighbor),
-    write(FirstNeighbor),
-    writeRestNeighbors(X, FirstNeighbor),
-    write('.').
-
-writeRestNeighbors(X, PrevNeighbor) :-
-    tetangga(X, Neighbor),
-    Neighbor \= PrevNeighbor,
-    write(', '),
-    write(Neighbor),
-    fail.
-
-writeRestNeighbors(_, _).
-
+:- ['wilayah.pl'].
 checkLocationDetail(Kode):-
 
     write('Kode              :  '),

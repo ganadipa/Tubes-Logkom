@@ -1,33 +1,4 @@
-
-
-player_to_string(p2, 'P2').
-
-player_name(p2, 'Fio').
-
-writeBenua(Player) :-
-    findall(Continent, 
-            (region_owner(Player, Region), from_continent(Region, Continent)), 
-            ContinentsList),
-    sort(ContinentsList, UniqueContinents),
-    print_continents(UniqueContinents).
-
-print_continents([]).
-print_continents([H|T]) :-
-    continent_to_string(H, String),
-    write(String), write(', '),
-    print_continents(T).
-
-region_owned_length(Player, Length):-
-    findall(Region, region_owner(Player, Region), Regions),
-    length(Regions, Length).
-
-total_troops_owned(Player, Total) :-
-    findall(Troops, 
-            (region_owner(Player, Region), total_troops(Region, Troops)), 
-            TroopsList),
-    sum_list(TroopsList, Total).
-
-
+:- ['wilayah.pl'].
 checkPlayerDetail(Player):-
     player_to_string(Player, String),
     write('\nPLAYER '),

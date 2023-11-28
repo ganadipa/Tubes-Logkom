@@ -218,6 +218,9 @@ player(p4).
 :- dynamic(current_player / 1).
 
 :- dynamic(player_name / 2).
+% Fungsi pembantu dynamic player name.
+add_player_name(Player, Name) :-
+    assertz(player_name(Player, Name)).
 
 :- dynamic(region_owner / 2).
 
@@ -266,3 +269,8 @@ current_player('Fio').
 turn_count(0).
 allowed_moves('Fio', 3).
 allowed_moves(opponent, 3).
+
+player_to_string(p1, 'P1').
+player_to_string(p2, 'P2').
+player_to_string(p3, 'P3').
+player_to_string(p4, 'P4').
