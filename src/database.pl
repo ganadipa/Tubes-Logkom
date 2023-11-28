@@ -153,10 +153,6 @@ code(af1, 'AF1').
 code(af2, 'AF2').
 code(af3, 'AF3').
 
-code(af1, 'AF1').
-code(af2, 'AF2').
-code(af3, 'AF3').
-
 code(a1, 'A1').
 code(a2, 'A2').
 code(a3, 'A3').
@@ -206,6 +202,13 @@ region_name(a4, 'Hokkaido').
 
 region_name(au1, 'Queensland').   
 region_name(au2, 'South Island').
+
+bonus_from_continent(north_america, 4).
+bonus_from_continent(south_america, 2).
+bonus_from_continent(africa, 3).
+bonus_from_continent(asia, 7).
+bonus_from_continent(australia, 2).
+bonus_from_continent(europe, 5).
 
 
 player(p1).
