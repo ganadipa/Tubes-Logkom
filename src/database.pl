@@ -229,5 +229,32 @@ player(p4).
 
 :- dynamic(allowed_moves / 2).
 
-total_troops(_,0).
-total_additional_troops(_,0).
+assertz(total_troops(na1, 0)).
+assertz(total_troops(na2, 0)).
+assertz(total_troops(na3, 0)).
+assertz(total_troops(na4, 0)).
+assertz(total_troops(na5, 0)).
+
+assertz(total_troops(sa1, 0)).
+assertz(total_troops(sa2, 0)).
+
+assertz(total_troops(e1, 0)).
+assertz(total_troops(e2, 0)).
+assertz(total_troops(e3, 0)).
+assertz(total_troops(e4, 0)).
+assertz(total_troops(e5, 0)).
+
+assertz(total_troops(af1, 0)).
+assertz(total_troops(af2, 0)).
+assertz(total_troops(af3, 0)).
+
+assertz(total_troops(a1, 0)).
+assertz(total_troops(a2, 0)).
+assertz(total_troops(a3, 0)).
+assertz(total_troops(a4, 0)).
+assertz(total_troops(a5, 0)).
+assertz(total_troops(a6, 0)).
+assertz(total_troops(a7, 0)).
+
+assertz(total_troops(au1, 0)).
+assertz(total_troops(au2, 0)).
