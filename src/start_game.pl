@@ -1,4 +1,4 @@
-:- dynamic(dice/2, maxDice/1, tie/1, winner/1, turn/1).
+:- dynamic(dice/2, maxDice/1, tie/1, winner/1).
 
 % validasi jumlah pemain
 readPlayers(N) :-
@@ -77,8 +77,7 @@ sortPlayers :-
     write('\n'),
     write('Urutan pemain berdasarkan nilai dadu: '),
     printPlayerNames(SortedPairs, Winner),
-    write('\n'),
-    setTurns(SortedPairs).
+    write('\n').
 
 % print urutan pemain dan urutan pertama
 printPlayerNames([], Winner) :-
@@ -105,17 +104,6 @@ calculateTroops(2, 24).
 calculateTroops(3, 16).
 calculateTroops(4, 12).
 
-% printTurns adalah fungsi yang mencetak daftar giliran pemain
-printTurns :-
-    findall(Name, turn(Name), Turns),
-    write('Daftar giliran pemain: '),
-    printList(Turns).
-
-% printList adalah fungsi bantuan yang mencetak daftar dengan koma
-printList([]) :- nl.
-printList([X]) :- write(X), nl.
-printList([X|Xs]) :- write(X), write(', '), printList(Xs).
-
 % fungsi start game
 startGame :-
     readPlayers(N),
@@ -129,44 +117,3 @@ startGame :-
     findall(Winner, winner(Winner), Winners),
     (Winners = [SingleWinner] -> Winner = SingleWinner; Winner = Winners),
     printFirstTurn(Winner).
-
-% fungsi tambahan untuk mengatur giliran pemain secara dinamis
-
-% setTurns(Pairs) adalah fungsi yang menetapkan giliran pemain berdasarkan urutan Pairs
-setTurns([]) :- !.
-setTurns([_Dice-Name | Rest]) :-
-    assertz(turn(Name)),
-    setTurns(Rest).
-
-% nextTurn adalah fungsi yang mengganti giliran pemain dengan pemain selanjutnya
-nextTurn :-
-    turn(Current),
-    retract(turn(Current)),
-    assertz(turn(Current)),
-    turn(Next),
-    (   region_owner(_, Next)
-    ->  write('Giliran '), write(Next), write(' untuk memilih wilayahnya.'), nl
-    ;   write('Seluruh wilayah telah diambil pemain.'), nl,
-        write('Memulai pembagian sisa tentara.'), nl,
-        write('Giliran '), write(Next), (' untuk meletakkan tentaranya.'), nl,
-    ).
-
-% takeLocation(Loc) adalah fungsi yang memungkinkan pemain untuk mengambil wilayah Loc
-
-takeLocation(Loc) :-
-    region(Loc),
-    turn(Player),
-    \+ region_owner(Loc, _),
-    asserta(region_owner(Loc, Player)),
-    code(Loc, X),
-    write(Player), write(' mengambil wilayah '), write(X), nl,
-    nextTurn,
-    !.
-
-takeLocation(Loc) :-
-    region(Loc),
-    region_owner(Loc, _),
-    turn(Player),
-    write('Wilayah sudah dikuasai. Tidak bisa mengambil.'), nl,
-    write('Giliran '), write(Player), write(' untuk memilih wilayahnya.'), nl,
-    !.
