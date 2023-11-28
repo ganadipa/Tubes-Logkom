@@ -225,15 +225,42 @@ player(p4).
 
 :- dynamic(total_additional_troops / 2).
 
+% Fungsi pembantu dynamic total_additional_troops.
+add_additional_troops(Player, Number) :-
+    assertz(total_additional_troops(Player, Number)).
+
+update_additional_troops(Player, Number) :-
+    retract(total_additional_troops(Player, _)),
+    assertz(total_additional_troops(Player, Number)).
+
+remove_additional_troops(Player) :-
+    retract(total_additional_troops(Player, _)).
+
+query_additional_troops(Player, Troops) :-
+    total_additional_troops(Player, Troops).
+
+list_all_additional_troops :-
+    findall((Player, Troops), total_additional_troops(Player, Troops), AllTroops),
+    print_all_additional_troops(AllTroops).
+
+print_all_additional_troops([]).
+print_all_additional_troops([(Player, Troops)|T]) :-
+    write(Player), write(': '), write(Troops), nl,
+    print_all_additional_troops(T).
+
 :- dynamic(turn_count/1).
 
 :- dynamic(allowed_moves/2).
 
-region_owner(fio, au1).
-region_owner(fio, au2).
+region_owner('Fio', au1).
+region_owner('Fio', au2).
+region_owner('Fio', na1).
+region_owner('Fio', na2).
 total_troops(au1, 4).
 total_troops(au2, 2).
-current_player(fio).
+total_troops(na1, 3).
+total_troops(na2, 5).
+current_player('Fio').
 turn_count(0).
-allowed_moves(fio, 3).
+allowed_moves('Fio', 3).
 allowed_moves(opponent, 3).
