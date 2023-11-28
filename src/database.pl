@@ -228,3 +228,6 @@ player(p4).
 :- dynamic(turn_count / 1).
 
 :- dynamic(allowed_moves / 2).
+
+total_troops(_,0).
+total_additional_troops(_,0).

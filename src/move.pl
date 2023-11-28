@@ -1,14 +1,27 @@
-:-initialization(consult('database.pl')).
+:- dynamic(move_count/1).
 /* Inisialisasi kondisi awal */
 /* Predikat untuk melakukan pemindahan tentara */
+move_count(0).
 move(X1, X2, Y) :-
     current_player(Player),
+    move_count(Now),
     valid_move(X1, X2, Y, Player),
     transfer_tentara(X1, X2, Y),
     write(Player), write(' memindahkan '), write(Y), write(' tentara dari '), write(X1), write(' ke '), write(X2), nl,
     % update_turn_count(Player),
-    print_current_status(X1,X2).
+    print_current_status(X1,X2),
+    Next is Now +1
+    retract(move_count(_)),
+    asserta(move_count(Next)),
+    next_player.
 
+check_and_next_player :-
+    move_count(3),
+    move_count(_),
+    retract(move_count(_)),
+    asserta(move_count(0)),
+    next_player,
+    !.
 /* Predikat untuk validasi pemindahan tentara */
 valid_move(X1, X2, Y, Player) :-
     region_owner(Player, X1),
@@ -50,20 +63,6 @@ transfer_tentara(X1, X2, Y) :-
     asserta(total_troops(X1, TotalTentaraX1_new)),
     asserta(total_troops(X2, TotalTentaraX2_new)).
 
-players([fio,opponent]).
-% /* Predikat untuk mengupdate jumlah pemindahan yang diizinkan dalam satu giliran */
-update_turn_count(Player) :-
-    turn_count(CurrentTurn),
-    players(Players),
-    next_player(Player, Players, NextPlayer),
-    NextTurn is (CurrentTurn + 1) mod length(Players),
-    retract(turn_count(CurrentTurn)),
-    asserta(turn_count(NextTurn)),
-    retract(current_player(Player)),
-    asserta(current_player(NextPlayer)).
-
-next_player(Player, [Player | Rest], Next) :- 
-    append(Rest, [Player], Next).
 
 /* Predikat untuk mendapatkan pemain selanjutnya */
 
