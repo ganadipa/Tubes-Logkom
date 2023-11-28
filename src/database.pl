@@ -255,22 +255,32 @@ print_all_additional_troops([(Player, Troops)|T]) :-
 
 :- dynamic(allowed_moves / 2).
 
-region_owner('Fio', au1).
-region_owner('Fio', au2).
-region_owner('Fio', na1).
-region_owner('Fio', na2).
-total_troops(_,0).
-total_additional_troops(_,0).
-total_troops(au1, 4).
-total_troops(au2, 2).
-total_troops(na1, 3).
-total_troops(na2, 5).
-current_player('Fio').
-turn_count(0).
-allowed_moves('Fio', 3).
-allowed_moves(opponent, 3).
+assertz(total_troops(na1, 0)).
+assertz(total_troops(na2, 0)).
+assertz(total_troops(na3, 0)).
+assertz(total_troops(na4, 0)).
+assertz(total_troops(na5, 0)).
 
-player_to_string(p1, 'P1').
-player_to_string(p2, 'P2').
-player_to_string(p3, 'P3').
-player_to_string(p4, 'P4').
+assertz(total_troops(sa1, 0)).
+assertz(total_troops(sa2, 0)).
+
+assertz(total_troops(e1, 0)).
+assertz(total_troops(e2, 0)).
+assertz(total_troops(e3, 0)).
+assertz(total_troops(e4, 0)).
+assertz(total_troops(e5, 0)).
+
+assertz(total_troops(af1, 0)).
+assertz(total_troops(af2, 0)).
+assertz(total_troops(af3, 0)).
+
+assertz(total_troops(a1, 0)).
+assertz(total_troops(a2, 0)).
+assertz(total_troops(a3, 0)).
+assertz(total_troops(a4, 0)).
+assertz(total_troops(a5, 0)).
+assertz(total_troops(a6, 0)).
+assertz(total_troops(a7, 0)).
+
+assertz(total_troops(au1, 0)).
+assertz(total_troops(au2, 0)).
