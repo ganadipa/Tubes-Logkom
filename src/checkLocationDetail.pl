@@ -1,4 +1,4 @@
-:- ['database.pl']
+
 
 
 writeTetangga(X) :-
