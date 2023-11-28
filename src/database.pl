@@ -248,14 +248,16 @@ print_all_additional_troops([(Player, Troops)|T]) :-
     write(Player), write(': '), write(Troops), nl,
     print_all_additional_troops(T).
 
-:- dynamic(turn_count/1).
+:- dynamic(turn_count / 1).
 
-:- dynamic(allowed_moves/2).
+:- dynamic(allowed_moves / 2).
 
 region_owner('Fio', au1).
 region_owner('Fio', au2).
 region_owner('Fio', na1).
 region_owner('Fio', na2).
+total_troops(_,0).
+total_additional_troops(_,0).
 total_troops(au1, 4).
 total_troops(au2, 2).
 total_troops(na1, 3).
