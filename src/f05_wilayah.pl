@@ -1,4 +1,5 @@
 :- dynamic(pemilik/1).
+:- ['database.pl'].
 
 
 
@@ -16,6 +17,8 @@ tetangga(a, 'C').
 
 pemilik(a, 'Azmi').
 total_tentara(a, 100).
+
+total_wilayah(a)
 
 
 
@@ -57,7 +60,7 @@ checkLocationDetail(Kode):-
 pemain(p2, 'Azmi').
 
 checkPlayerDetail(Player):-
-    player_to_string(Player, String)
+    player_to_string(Player, String),
     write('\nPLAYER '),
     write(String),
     write('\n\n'),
@@ -68,17 +71,17 @@ checkPlayerDetail(Player):-
     write('\nBenua                  :  '),
     write('\nTotal Wilayah          :  '),
     write('\nTotal Tentara Aktif    :  '),
-    write('\nTotal Tentara Tambahan :  '),
+    write('\nTotal Tentara Tambahan :  ').
     
 
 
 
 main:-
-    write('\nCheck Location\n'),
+    write('\n\nCheck Location\n'),
     checkLocationDetail(a),
-    write('\nCheck Player\n'),
+    write('\n\nCheck Player\n'),
     checkPlayerDetail(p2),
-    write('...').
+    write('\n\n...').
 
 
 :- initialization(main).

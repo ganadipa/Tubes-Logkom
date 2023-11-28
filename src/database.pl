@@ -1,208 +1,239 @@
-% wilayah
-wilayah(na1).
-wilayah(na2).
-wilayah(na3).
-wilayah(na4).
-wilayah(na5).
+% region
+region(na1).
+region(na2).
+region(na3).
+region(na4).
+region(na5).
 
-wilayah(sa1).
-wilayah(sa2).
+region(sa1).
+region(sa2).
 
-wilayah(e1).
-wilayah(e2).
-wilayah(e3).
-wilayah(e4).
-wilayah(e5).
+region(e1).
+region(e2).
+region(e3).
+region(e4).
+region(e5).
 
-wilayah(af1).
-wilayah(af2).
-wilayah(af3).
+region(af1).
+region(af2).
+region(af3).
 
-wilayah(a1).
-wilayah(a2).
-wilayah(a3).
-wilayah(a4).
-wilayah(a5).
-wilayah(a6).
-wilayah(a7).
+region(a1).
+region(a2).
+region(a3).
+region(a4).
+region(a5).
+region(a6).
+region(a7).
 
-wilayah(au1).
-wilayah(au2).
+region(au1).
+region(au2).
 
-benua(amerika_utara).
-benua(eropa).
-benua(asia).
-benua(amerika_selatan).
-benua(afrika).
-benua(australia).
+continent(north_america).
+continent(europe).
+continent(asia).
+continent(south_america).
+continent(africa).
+continent(australia).
 
-dari_benua(na1,amerika_utara).
-dari_benua(na2,amerika_utara).
-dari_benua(na3,amerika_utara).
-dari_benua(na4,amerika_utara).
-dari_benua(na5,amerika_utara).
+from_continent(na1,north_america).
+from_continent(na2,north_america).
+from_continent(na3,north_america).
+from_continent(na4,north_america).
+from_continent(na5,north_america).
 
-dari_benua(sa1,amerika_selatan).
-dari_benua(sa2,amerika_selatan).
+from_continent(sa1,south_america).
+from_continent(sa2,south_america).
 
-dari_benua(e1,eropa).
-dari_benua(e2,eropa).
-dari_benua(e3,eropa).
-dari_benua(e4,eropa).
-dari_benua(e5,eropa).
+from_continent(e1,europe).
+from_continent(e2,europe).
+from_continent(e3,europe).
+from_continent(e4,europe).
+from_continent(e5,europe).
 
-dari_benua(af1,afrika).
-dari_benua(af2,afrika).
-dari_benua(af3,afrika).
+from_continent(af1,africa).
+from_continent(af2,africa).
+from_continent(af3,africa).
 
-dari_benua(a1,asia).
-dari_benua(a2,asia).
-dari_benua(a3,asia).
-dari_benua(a4,asia).
-dari_benua(a5,asia).
-dari_benua(a6,asia).
-dari_benua(a7,asia).
+from_continent(a1,asia).
+from_continent(a2,asia).
+from_continent(a3,asia).
+from_continent(a4,asia).
+from_continent(a5,asia).
+from_continent(a6,asia).
+from_continent(a7,asia).
 
-dari_benua(au1,australia).
-dari_benua(au2,australia).
+from_continent(au1,australia).
+from_continent(au2,australia).
 
-tetangga(na4,na2).
-tetangga(na3,na4).
-tetangga(na2,na4).
-tetangga(na4,na3).
-tetangga(na1,na2).
-tetangga(na2,na1).
-tetangga(na3,na1).
-tetangga(na1,na3).
-tetangga(na4,na5).
-tetangga(na5,na4).
-tetangga(na5,na2).
-tetangga(na2,na5).
-tetangga(e1,na5).
-tetangga(na5,e1).
-tetangga(sa1,na3).
-tetangga(na3,sa1).
-tetangga(sa2,sa1).
-tetangga(sa1,sa2).
-tetangga(sa2,af1).
-tetangga(af1,sa2).
-tetangga(af1,af3).
-tetangga(af3,af1).
-tetangga(af1,af2).
-tetangga(af2,af1).
-tetangga(af2,af3).
-tetangga(af3,af2).
-tetangga(e3, af1).
-tetangga(af1,e3).
-tetangga(e1,e3).
-tetangga(e3,e1).
-tetangga(e1,e2).
-tetangga(e2,e1).
-tetangga(af2,e4).
-tetangga(e4,af2).
-tetangga(af2,e5).
-tetangga(e5,af2).
-tetangga(e4,e5).
-tetangga(e5,e4).
-tetangga(e2,e4).
-tetangga(e4,e2).
-tetangga(e2,a1).
-tetangga(a1,e2).
-tetangga(a4,e5).
-tetangga(e5,a4).
-tetangga(e2,a1).
-tetangga(a1,e2).
-tetangga(a1,a4).
-tetangga(a4,a1).
-tetangga(a4,a5).
-tetangga(a5,a4).
-tetangga(a5,a3).
-tetangga(a3,a5).
-tetangga(a5,a2).
-tetangga(a2,a5).
-tetangga(a4,a2).
-tetangga(a2,a4).
-tetangga(a2,a6).
-tetangga(a6,a2).
-tetangga(a4,a6).
-tetangga(a6,a4).
-tetangga(a5,a6).
-tetangga(a6,a5).
-tetangga(a6,a7).
-tetangga(a7,a6).
-tetangga(a3,na1).
-tetangga(a3,na3).
-tetangga(na1,a3).
-tetangga(na3,a3).
-tetangga(a6,au1).
-tetangga(au1,a6).
-tetangga(au1,au2).
-tetangga(au2,au1).
-tetangga(au2,sa2).
-tetangga(sa2,au2).
+adjacent(na4,na2).
+adjacent(na3,na4).
+adjacent(na2,na4).
+adjacent(na4,na3).
+adjacent(na1,na2).
+adjacent(na2,na1).
+adjacent(na3,na1).
+adjacent(na1,na3).
+adjacent(na4,na5).
+adjacent(na5,na4).
+adjacent(na5,na2).
+adjacent(na2,na5).
+adjacent(e1,na5).
+adjacent(na5,e1).
+adjacent(sa1,na3).
+adjacent(na3,sa1).
+adjacent(sa2,sa1).
+adjacent(sa1,sa2).
+adjacent(sa2,af1).
+adjacent(af1,sa2).
+adjacent(af1,af3).
+adjacent(af3,af1).
+adjacent(af1,af2).
+adjacent(af2,af1).
+adjacent(af2,af3).
+adjacent(af3,af2).
+adjacent(e3, af1).
+adjacent(af1,e3).
+adjacent(e1,e3).
+adjacent(e3,e1).
+adjacent(e1,e2).
+adjacent(e2,e1).
+adjacent(af2,e4).
+adjacent(e4,af2).
+adjacent(af2,e5).
+adjacent(e5,af2).
+adjacent(e4,e5).
+adjacent(e5,e4).
+adjacent(e2,e4).
+adjacent(e4,e2).
+adjacent(e2,a1).
+adjacent(a1,e2).
+adjacent(a4,e5).
+adjacent(e5,a4).
+adjacent(e2,a1).
+adjacent(a1,e2).
+adjacent(a1,a4).
+adjacent(a4,a1).
+adjacent(a4,a5).
+adjacent(a5,a4).
+adjacent(a5,a3).
+adjacent(a3,a5).
+adjacent(a5,a2).
+adjacent(a2,a5).
+adjacent(a4,a2).
+adjacent(a2,a4).
+adjacent(a2,a6).
+adjacent(a6,a2).
+adjacent(a4,a6).
+adjacent(a6,a4).
+adjacent(a5,a6).
+adjacent(a6,a5).
+adjacent(a6,a7).
+adjacent(a7,a6).
+adjacent(a3,na1).
+adjacent(a3,na3).
+adjacent(na1,a3).
+adjacent(na3,a3).
+adjacent(a6,au1).
+adjacent(au1,a6).
+adjacent(au1,au2).
+adjacent(au2,au1).
+adjacent(au2,sa2).
+adjacent(sa2,au2).
 
-kode(na1, 'NA1').
-kode(na2, 'NA2').
-kode(na3, 'NA3').
-kode(na4, 'NA4').
+code(na1, 'NA1').
+code(na2, 'NA2').
+code(na3, 'NA3').
+code(na4, 'NA4').
 
-kode(sa1, 'SA1').
-kode(sa2, 'SA2').
+code(sa1, 'SA1').
+code(sa2, 'SA2').
 
-kode(af1, 'AF1').
-kode(af2, 'AF2').
-kode(af3, 'AF3').
+code(af1, 'AF1').
+code(af2, 'AF2').
+code(af3, 'AF3').
 
-kode(af1, 'AF1').
-kode(af2, 'AF2').
-kode(af3, 'AF3').
+code(af1, 'AF1').
+code(af2, 'AF2').
+code(af3, 'AF3').
 
-kode(a1, 'A1').
-kode(a2, 'A2').
-kode(a3, 'A3').
-kode(a4, 'A4').
-kode(a5, 'A5').
-kode(a6, 'A6').
-kode(a7, 'A7').
+code(a1, 'A1').
+code(a2, 'A2').
+code(a3, 'A3').
+code(a4, 'A4').
+code(a5, 'A5').
+code(a6, 'A6').
+code(a7, 'A7').
 
-kode(au1, 'AU1').
-kode(au2, 'AU2').
+code(au1, 'AU1').
+code(au2, 'AU2').
 
-kode(e1, 'E1').
-kode(e2, 'E2').
-kode(e3, 'E3').
-kode(e4, 'E4').
-kode(e5, 'E5').
+code(e1, 'E1').
+code(e2, 'E2').
+code(e3, 'E3').
+code(e4, 'E4').
+code(e5, 'E5').
 
-benua_to_string(amerika_utara, 'Amerika Utara').
-benua_to_string(amerika_selatan, 'Amerika Selatan').
-benua_to_string(eropa, 'Eropa').
-benua_to_string(afrika, 'Afrika').
-benua_to_string(asia, 'Asia').
-benua_to_string(australia, 'Australia').
+continent_to_string(north_america, 'Amerika Utara').
+continent_to_string(south_america, 'Amerika Selatan').
+continent_to_string(europe, 'europe').
+continent_to_string(africa, 'africa').
+continent_to_string(asia, 'Asia').
+continent_to_string(australia, 'Australia').
 
-nama_wilayah(na1, 'Greenland').
-nama_wilayah(na2, 'Ontario').
-nama_wilayah(na3, 'Yucatan'). 
-nama_wilayah(na4, 'California').
+region_name(na1, 'Greenland').
+region_name(na2, 'Ontario').
+region_name(na3, 'Yucatan'). 
+region_name(na4, 'California').
 
-nama_wilayah(sa1, 'Amazonas').     
-nama_wilayah(sa2, 'Patagonia').
+region_name(sa1, 'Amazonas').     
+region_name(sa2, 'Patagonia').
 
-nama_wilayah(e1, 'Tuscany').
-nama_wilayah(e2, 'Bavaria').
-nama_wilayah(e3, 'Cornwall').
-nama_wilayah(e4, 'Normandy').
-nama_wilayah(e5, 'Friesland').
+region_name(e1, 'Tuscany').
+region_name(e2, 'Bavaria').
+region_name(e3, 'Cornwall').
+region_name(e4, 'Normandy').
+region_name(e5, 'Friesland').
 
-nama_wilayah(af1, 'Gauteng').      
-nama_wilayah(af2, 'Lagos').        
-nama_wilayah(af3, 'Casablanca').   
+region_name(af1, 'Gauteng').      
+region_name(af2, 'Lagos').        
+region_name(af3, 'Casablanca').   
 
-nama_wilayah(a1, 'Bali').          
-nama_wilayah(a2, 'Phuket').        
-nama_wilayah(a3, 'Jeju').          
-nama_wilayah(a4, 'Hokkaido').      
+region_name(a1, 'Bali').          
+region_name(a2, 'Phuket').        
+region_name(a3, 'Jeju').          
+region_name(a4, 'Hokkaido').      
 
-nama_wilayah(au1, 'Queensland').   
-nama_wilayah(au2, 'South Island'). 
+region_name(au1, 'Queensland').   
+region_name(au2, 'South Island').
+
+
+player(p1).
+player(p2).
+player(p3).
+player(p4).
+
+:- dynamic(total_player / 1).
+
+:- dynamic(current_player / 1).
+
+:- dynamic(player_name / 2).
+
+:- dynamic(region_owner / 2).
+
+:- dynamic(total_troops / 2).
+
+:- dynamic(total_additional_troops / 2).
+
+:- dynamic(turn_count/1).
+
+:- dynamic(allowed_moves/2).
+
+region_owner(fio, au1).
+region_owner(fio, au2).
+total_troops(au1, 4).
+total_troops(au2, 2).
+current_player(fio).
+turn_count(0).
+allowed_moves(fio, 3).
+allowed_moves(opponent, 3).
