@@ -181,6 +181,32 @@ continent_to_string(africa, 'africa').
 continent_to_string(asia, 'Asia').
 continent_to_string(australia, 'Australia').
 
+region_name(na1, 'Greenland').
+region_name(na2, 'Ontario').
+region_name(na3, 'Yucatan'). 
+region_name(na4, 'California').
+
+region_name(sa1, 'Amazonas').     
+region_name(sa2, 'Patagonia').
+
+region_name(e1, 'Tuscany').
+region_name(e2, 'Bavaria').
+region_name(e3, 'Cornwall').
+region_name(e4, 'Normandy').
+region_name(e5, 'Friesland').
+
+region_name(af1, 'Gauteng').      
+region_name(af2, 'Lagos').        
+region_name(af3, 'Casablanca').   
+
+region_name(a1, 'Bali').          
+region_name(a2, 'Phuket').        
+region_name(a3, 'Jeju').          
+region_name(a4, 'Hokkaido').      
+
+region_name(au1, 'Queensland').   
+region_name(au2, 'South Island').
+
 
 player(p1).
 player(p2).

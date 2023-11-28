@@ -1,4 +1,5 @@
 :- dynamic(pemilik/1).
+:- ['database.pl'].
 
 
 
@@ -7,11 +8,6 @@
 
 kode(a, 'A1').
 
-
-nama(na1, 'Greenland').
-nama(na1, 'Kanada').
-nama(na1, 'Mexico').
-nama(na1, 'Amerika Serikat').
 
 nama(a, 'Indonesia').
 
@@ -22,47 +18,18 @@ tetangga(a, 'C').
 pemilik(a, 'Azmi').
 total_tentara(a, 100).
 
+total_wilayah(a)
 
-
-writeTetangga(X) :-
-    tetangga(X, FirstNeighbor),
-    write(FirstNeighbor),
-    writeRestNeighbors(X, FirstNeighbor),
-    write('.').
-
-writeRestNeighbors(X, PrevNeighbor) :-
-    tetangga(X, Neighbor),
-    Neighbor \= PrevNeighbor,
-    write(', '),
-    write(Neighbor),
-    fail.
-
-writeRestNeighbors(_, _).
 
 player_to_string(p2, 'P2').
 
 
-checkLocationDetail(Kode):-
 
-    write('Kode              :  '),
-    kode(Kode, X),
-    write(X),
-    write('\nNama              :  '),
-    nama(Kode,Y),
-    write(Y),
-    write('\nPemilik           :  '),
-    pemilik(Kode,Z),
-    write(Z),
-    write('\nTotal Tentara     :  '),
-    total_tentara(Kode, W),
-    write(W),
-    write('\nTetangga          :  '),
-    writeTetangga(Kode).
 
 pemain(p2, 'Azmi').
 
 checkPlayerDetail(Player):-
-    player_to_string(Player, String)
+    player_to_string(Player, String),
     write('\nPLAYER '),
     write(String),
     write('\n\n'),
@@ -73,17 +40,17 @@ checkPlayerDetail(Player):-
     write('\nBenua                  :  '),
     write('\nTotal Wilayah          :  '),
     write('\nTotal Tentara Aktif    :  '),
-    write('\nTotal Tentara Tambahan :  '),
+    write('\nTotal Tentara Tambahan :  ').
     
 
 
 
 main:-
-    write('\nCheck Location\n'),
+    write('\n\nCheck Location\n'),
     checkLocationDetail(a),
-    write('\nCheck Player\n'),
+    write('\n\nCheck Player\n'),
     checkPlayerDetail(p2),
-    write('...').
+    write('\n\n...').
 
 
 :- initialization(main).
