@@ -39,9 +39,3 @@ takeLocation(Loc) :-
     write('Wilayah tidak ada. Silakan pilih wilayah yang valid.'), nl,
     write('Giliran '), write(Player), write(' untuk memilih wilayahnya.'), nl,
     !.
-
-takeLocation :-
-    takeLocation(Loc),
-    write('Seluruh wilayah telah diambil pemain'), nl,
-    write('Memulai pembagian sisa tentara'), nl,
-    write('Giliran Dillon untuk meletakkan tentaranya'), nl.
