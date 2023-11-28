@@ -198,3 +198,16 @@ player(p4).
 :- dynamic(total_troops / 2).
 
 :- dynamic(total_additional_troops / 2).
+
+:- dynamic(turn_count/1).
+
+:- dynamic(allowed_moves/2).
+
+region_owner(fio, au1).
+region_owner(fio, au2).
+total_troops(au1, 4).
+total_troops(au2, 2).
+current_player(fio).
+turn_count(0).
+allowed_moves(fio, 3).
+allowed_moves(opponent, 3).

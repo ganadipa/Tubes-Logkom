@@ -1,56 +1,76 @@
-% pemindahan_tentara.pl
-% not completed karena masih perlu digabung dengan inisiasi
-% Rule untuk pemindahan tentara
+:-initialization(consult('database.pl')).
+/* Inisialisasi kondisi awal */
+/* Predikat untuk melakukan pemindahan tentara */
 move(X1, X2, Y) :-
-    player(Player, _), % Memastikan ada pemain dengan nama Player
-    milik_pemain(Player, X1), % Memastikan X1 adalah wilayah pemain
-    milik_pemain(Player, X2), % Memastikan X2 adalah wilayah pemain
-    jumlah_tentara(X1, JumlahAwal), % Mendapatkan jumlah tentara di wilayah asal
-    JumlahAwal >= Y + 1, % Pastikan jumlah tentara cukup untuk dipindahkan
-    Y >= 1, % Pastikan jumlah tentara yang ingin dipindahkan valid
-    batas_pemindahan(Batas), % Mendapatkan batas maksimum pemindahan per turn
-    count_pemindahan(Player, Pemindahan), % Mendapatkan jumlah pemindahan yang sudah dilakukan
-    Pemindahan < Batas, % Pastikan jumlah pemindahan masih kurang dari batas maksimum
-    JumlahAkhir is JumlahAwal - Y,
-    retract(jumlah_tentara(X1, JumlahAwal)), % Update jumlah tentara di wilayah asal
-    asserta(jumlah_tentara(X1, 1)), % Sisakan 1 tentara di wilayah asal
-    retract(jumlah_tentara(X2, JumlahX2)), % Update jumlah tentara di wilayah tujuan
-    JumlahTujuan is JumlahX2 + Y,
-    asserta(jumlah_tentara(X2, JumlahTujuan)), % Tambah tentara di wilayah tujuan
-    retract(count_pemindahan(Player, Pemindahan)), % Update jumlah pemindahan yang sudah dilakukan
-    PemindahanBaru is Pemindahan + 1,
-    asserta(count_pemindahan(Player, PemindahanBaru)), % Tambah jumlah pemindahan yang sudah dilakukan
-    write(Player), write(' memindahkan '), write(Y),
-    write(' tentara dari '), write(X1),
-    write(' ke '), write(X2), write('.'), nl,
-    write('Jumlah tentara di '), write(X1), write(': 1'), nl,
-    write('Jumlah tentara di '), write(X2), write(': '), write(JumlahTujuan), nl.
+    current_player(Player),
+    valid_move(X1, X2, Y, Player),
+    transfer_tentara(X1, X2, Y),
+    write(Player), write(' memindahkan '), write(Y), write(' tentara dari '), write(X1), write(' ke '), write(X2), nl,
+    % update_turn_count(Player),
+    print_current_status(X1,X2).
 
-% Rule untuk menangani kasus jumlah tentara tidak valid
-move(X1, X2, Y) :-
-    player(Player, _),
-    milik_pemain(Player, X1),
-    milik_pemain(Player, X2),
-    jumlah_tentara(X1, JumlahAwal),
-    JumlahAwal < Y + 1,
-    write('Tentara tidak mencukupi. Pemindahan dibatalkan.'), nl.
+/* Predikat untuk validasi pemindahan tentara */
+valid_move(X1, X2, Y, Player) :-
+    region_owner(Player, X1),
+    region_owner(Player, X2),
+    total_troops(X1, TotalTentaraX1),
+    Y > 0,
+    Y < TotalTentaraX1.
+     % Memastikan setidaknya satu tentara tersisa di wilayah asal
+valid_move(X1, X2, Y, _) :-
+    total_troops(X1, TotalTentaraX1),
+    Y >= TotalTentaraX1,
+    write('Tentara tidak cukup untuk pemindahan.'),
+    nl, write('Pemindahan dibatalkan.'), nl, !, fail.
+valid_move(X1, X2, _, Player) :-
+    \+ region_owner(Player, X1),
+    \+ region_owner(Player, X2),
+    write(Player), write(' tidak memiliki wilayah '), write(X1), write(' dan '), write(X2),
+    nl, write('Pemindahan dibatalkan.'), nl, !, fail.
 
-% Rule untuk menangani kasus wilayah tidak valid
-move(X1, X2, Y) :-
-    player(Player, _),
-    \+ milik_pemain(Player, X1),
+/* Exception jika player tidak memiliki X1 */
+valid_move(X1, _, _, Player) :-
+    \+ region_owner(Player, X1),
     write(Player), write(' tidak memiliki wilayah '), write(X1),
-    write('. Pemindahan dibatalkan.'), nl.
+    nl, write('Pemindahan dibatalkan.'), nl, !, fail.
 
-% Rule untuk menangani kasus pemain melebihi batas maksimum pemindahan per turn
-move(X1, X2, Y) :-
-    player(Player, _),
-    milik_pemain(Player, X1),
-    milik_pemain(Player, X2),
-    jumlah_tentara(X1, JumlahAwal),
-    JumlahAwal >= Y + 1,
-    Y >= 1,
-    batas_pemindahan(Batas),
-    count_pemindahan(Player, Pemindahan),
-    Pemindahan >= Batas,
-    write('Pemindahan melebihi batas maksimum per turn. Pemindahan dibatalkan.'), nl.
+/* Exception jika player tidak memiliki X2 */
+valid_move(_, X2, _, Player) :-
+    \+ region_owner(Player, X2),
+    write(Player), write(' tidak memiliki wilayah '), write(X2),
+    nl, write('Pemindahan dibatalkan.'), nl, !, fail.
+/* Predikat untuk mentransfer tentara dari X1 ke X2 */
+transfer_tentara(X1, X2, Y) :-
+    total_troops(X1, TotalTentaraX1),
+    total_troops(X2, TotalTentaraX2),
+    TotalTentaraX2_new is Y +TotalTentaraX2,
+    TotalTentaraX1_new is TotalTentaraX1-Y,
+    retract(total_troops(X1, _)),
+    retract(total_troops(X2, _)),
+    asserta(total_troops(X1, TotalTentaraX1_new)),
+    asserta(total_troops(X2, TotalTentaraX2_new)).
+
+players([fio,opponent]).
+% /* Predikat untuk mengupdate jumlah pemindahan yang diizinkan dalam satu giliran */
+update_turn_count(Player) :-
+    turn_count(CurrentTurn),
+    players(Players),
+    next_player(Player, Players, NextPlayer),
+    NextTurn is (CurrentTurn + 1) mod length(Players),
+    retract(turn_count(CurrentTurn)),
+    asserta(turn_count(NextTurn)),
+    retract(current_player(Player)),
+    asserta(current_player(NextPlayer)).
+
+next_player(Player, [Player | Rest], Next) :- 
+    append(Rest, [Player], Next).
+
+/* Predikat untuk mendapatkan pemain selanjutnya */
+
+
+/* Predikat untuk mencetak status saat ini */
+print_current_status(X1,X2) :-
+    total_troops(X1, TentaraAU1),
+total_troops(X2, TentaraAU2),
+write('Jumlah tentara di '), write(X1), write(': '), write(TentaraAU1), nl,
+write('Jumlah tentara di '), write(X2), write(': '), write(TentaraAU2), nl.
