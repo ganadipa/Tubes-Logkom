@@ -87,6 +87,7 @@ updateTie(_, _).
 % urutan pemain
 sortPlayers :-
     findall(Dice-Name, dice(Name, Dice), Pairs),
+    update_players(Pairs),
     keysort(Pairs, NewPairs),
     reverse(NewPairs, SortedPairs),
     findall(Winner, winner(Winner), Winners),
@@ -124,12 +125,20 @@ calculateTroops(4, 12).
 % fungsi start game
 startGame :-
     retractall(player_name(_,_)),
+    retractall(dice(_,_)),
+    retractall(maxDice(_)),
+    retractall(tie(_)),
+    retractall(winner(_)),
+
+
+
     readPlayers(N),
     initPlayers(1, N),
     write('\n'),
     rollDiceForPlayers,
     checkTie,
     sortPlayers,
+
     printTroops,
     write('\n'),
     findall(Winner, winner(Winner), Winners),
@@ -154,3 +163,33 @@ startGame :-
             assertz(total_additional_troops(p4, TotalAdditionalTroops))
         ) ; !
     ).
+
+sort_players([], _).
+sort_players([_-Name | T], N) :-
+    (
+        N == 1 -> 
+        (
+            retract(player_name(p1, _)),
+            assertz(player_name(p1, Name))
+        );
+        N == 2 -> 
+        (
+            retract(player_name(p2, _)),
+            assertz(player_name(p2, Name))
+        );
+        N == 3 -> 
+        (
+            retract(player_name(p3, _)),
+            assertz(player_name(p3, Name))
+        );
+        N == 4 -> 
+        (
+            retract(player_name(p4, _)),
+            assertz(player_name(p4, Name))
+        ); !
+    ),
+    N1 is N + 1,
+    sort_players(T, N1).
+
+update_players(Pairs) :-
+    sort_players(Pairs, 1).
