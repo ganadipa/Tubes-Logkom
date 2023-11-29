@@ -8,35 +8,72 @@
 /* Fase Attack */
 attack :-
     current_player(Player),
-    write('Sekarang giliran Player '), write(Player), write(' menyerang.'), nl,
+    player_name(Player, Name),
+    write('Sekarang giliran Player '), write(Name), write(' menyerang.'), nl,
     displayMap,
     write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), read(StartRegion),
-    valid_start_region(StartRegion, Player),
-    region_owner(StartRegion, Player),
-    total_troops(StartRegion, StartRegionTentara),
-    StartRegionTentara > 1,
-    write('Dalam daerah '), write(StartRegion), write(', Anda memiliki sebanyak '), write(StartRegionTentara), write(' tentara.'), nl,
-    write('Masukkan banyak tentara yang akan bertempur: '), read(AttackingTroops),
-    valid_attacking_troops(AttackingTroops, StartRegionTentara),
+    valid_start_region(StartRegion, Player, ValidatedStartRegion),
+
     
-    write('Player '), write(Player), write(' mengirim sebanyak '), write(AttackingTroops), write(' tentara untuk berperang.'), nl,
-    write('/* PETA */'), nl,
+    total_troops(ValidatedStartRegion, StartRegionTentara),
+    validate_jumlah_tentara(StartRegionTentara),
+
+    write('Dalam daerah '), write(ValidatedStartRegion), write(', Anda memiliki sebanyak '), write(StartRegionTentara), write(' tentara.'), nl,
+
+
+    write('Masukkan banyak tentara yang akan bertempur: '), read(AttackingTroops),
+    valid_attacking_troops(AttackingTroops, StartRegionTentara, ValidatedAttackingTroops),
+    
+
+    write('Player '), write(Player), write(' mengirim sebanyak '), write(ValidatedAttackingTroops), write(' tentara untuk berperang.'), nl, nl,
+
+    displayMap,
+    
     write('Pilihlah daerah yang ingin Anda serang: '), read(TargetRegion),
-    valid_target_region(TargetRegion,Player, StartRegion),
-    battle(StartRegion, TargetRegion, AttackingTroops).
+    valid_target_region(TargetRegion, Player, ValidatedStartRegion),
+    battle(ValidatedStartRegion, TargetRegion, ValidatedAttackingTroops).
 
-valid_start_region(Region, Player) :-
-    region_owner(Region, Player),
-    !.
-valid_start_region(_, Player) :-
-    write('Daerah tidak valid. Silahkan input kembali.'), nl,
-    write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), read(NewRegion),
-    valid_start_region(NewRegion, Player).
+valid_start_region(Region, Player, Validated) :-
+    (
+        \+ region_owner(Region, Player) -> 
+            (write('Daerah tidak valid. Silahkan input kembali.'), nl,
+            write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), 
+            read(NewRegion),
+            valid_start_region(NewRegion, Player, NewValidated),
+            write(NewValidated),
+            V = NewValidated
+            
+            
+            );
+        V = Region, !
+    ),
+    Validated = V.
 
-valid_attacking_troops(Troops, MaxTroops) :-
-    Troops > 0,
-    Troops < MaxTroops,
-    !.
+
+% valid_start_region(_, Player) :-
+%    write('Daerah tidak valid. Silahkan input kembali.'), nl,
+%    write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), read(NewRegion),
+%    valid_start_region(NewRegion, Player).
+
+valid_attacking_troops(Troops, MaxTroops, Validated) :-
+    (
+        \+ (Troops > 0, Troops < MaxTroops) -> 
+        (
+            write('Banyak tentara tidak valid. Silahkan input kembali.'), nl,
+            write('Masukkan banyak tentara yang akan bertempur: '), read(NewTroops), valid_attacking_troops(NewTroops, MaxTroops, NewValidated),
+            V = NewValidated
+        );
+            V = Troops, !
+    ),
+    Validated = V.
+
+
+validate_jumlah_tentara(StartRegionTentara):-
+    (
+        StartRegionTentara == 1 -> 
+        write('Tidak bisa menggunakan daerah ini karena jumlah tentara di daerah ini hanya 1.'), fail;!
+    ).
+
 valid_attacking_troops(_,MaxTroops) :-
     write('Banyak tentara tidak valid. Silahkan input kembali.'), nl,
     write('Masukkan banyak tentara yang akan bertempur: '), read(NewTroops),
