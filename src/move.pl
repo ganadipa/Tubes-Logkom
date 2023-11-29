@@ -24,8 +24,8 @@ check_and_next_player :-
     !.
 /* Predikat untuk validasi pemindahan tentara */
 valid_move(X1, X2, Y, Player) :-
-    region_owner(Player, X1),
-    region_owner(Player, X2),
+    region_owner(X1, Player),
+    region_owner(X2, Player),
     total_troops(X1, TotalTentaraX1),
     Y > 0,
     Y < TotalTentaraX1.
@@ -43,13 +43,13 @@ valid_move(X1, X2, _, Player) :-
 
 /* Exception jika player tidak memiliki X1 */
 valid_move(X1, _, _, Player) :-
-    \+ region_owner(Player, X1),
+    \+ region_owner(X1, Player),
     write(Player), write(' tidak memiliki wilayah '), write(X1),
     nl, write('Pemindahan dibatalkan.'), nl, !, fail.
 
 /* Exception jika player tidak memiliki X2 */
 valid_move(_, X2, _, Player) :-
-    \+ region_owner(Player, X2),
+    \+ region_owner(X2, Player),
     write(Player), write(' tidak memiliki wilayah '), write(X2),
     nl, write('Pemindahan dibatalkan.'), nl, !, fail.
 /* Predikat untuk mentransfer tentara dari X1 ke X2 */
