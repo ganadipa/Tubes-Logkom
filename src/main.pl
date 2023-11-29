@@ -1,6 +1,8 @@
 % Database
-
 :- initialization(consult('database.pl')).
+
+% Map
+:- initialization(consult('displayMap.pl')).
 
 
 % Initiating
