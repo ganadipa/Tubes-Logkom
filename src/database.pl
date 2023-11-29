@@ -330,7 +330,8 @@ print_all_additional_troops([(Player, Troops)|T]) :-
 
 :- dynamic(isDisease/1).
 :- dynamic(has_risk_card/2).
-:- initialization(assertz(isDisease(false))).
 :- dynamic(casefire_order_effect/1).
 :- dynamic(super_soldier_serum_effect/1).
 :- dynamic(auxiliary_troops_effect/1).
+:- dynamic(disease_outbreak_effect/1).
+:- dynamic(supply_chain_issue_effect/1).
