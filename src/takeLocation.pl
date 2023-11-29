@@ -6,11 +6,12 @@ nextTurn :-
     retract(turn(Current)),
     assertz(turn(Current)),
     turn(Next),
-    (   region_owner(_, Next)
-    ->  write('Giliran '), write(Next), write(' untuk memilih wilayahnya.'), nl
-    ;   write('Seluruh wilayah telah diambil pemain.'), nl,
-        write('Memulai pembagian sisa tentara.'), nl,
-        write('Giliran '), write(Next), (' untuk meletakkan tentaranya.'), nl,
+    findall(R, region(R), Regions),
+    length(Regions, N),
+    (   N =:= 0
+    ->  write('Seluruh wilayah telah diambil pemain.'), nl,
+        write('Memulai pembagian sisa tentara.'), nl
+    ;   write('Giliran '), write(Next), write(' untuk memilih wilayahnya.'), nl
     ).
 
 % takeLocation(Loc) adalah fungsi yang memungkinkan pemain untuk mengambil wilayah Loc
