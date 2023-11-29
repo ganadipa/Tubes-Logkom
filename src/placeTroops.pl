@@ -31,7 +31,7 @@ placeTroops(Region, TroopCount) :-
     assertz(total_additional_troops(Player, RemainingTroops)),
 
 
-    format('Terdapat ~w tentara yang tersisa.~n', [RemainingTroops]),
+    format('Terdapat ~w tentara yang tersisa.\n', [RemainingTroops]),
     next_player,
     current_player(NextPlayer),
-    format('Giliran ~w untuk meletakkan tentaranya', NextPlayer).
+    format('Giliran ~w untuk meletakkan tentaranya\n', NextPlayer).
