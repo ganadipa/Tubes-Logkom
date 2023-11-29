@@ -1,12 +1,3 @@
-player_name(p2, 'Azmi').
-region_owner(na1, p2).
-region_owner(na2, p2).
-total_troops(na1, 5).
-total_troops(na2, 10).
-
-main_CIT:-
-    add_additional_troops(p2, 123),
-    checkIncomingTroops(p2).
 
 /* checkIncomingTroops(p2).*/
 checkIncomingTroops(Player):-
@@ -81,5 +72,3 @@ checkIncomingTroops(Player):-
     write('\nTotal tentara tambahan               :  '),
     total_additional_troops(Player, TotalAdditionalTroops),
     write(TotalAdditionalTroops).
-
-:- initialization(main_CIT).

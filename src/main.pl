@@ -23,3 +23,9 @@
 % Other
 
 :- initialization(consult('next_player.pl')).
+
+% Wilayah dan Player
+:- initialization(consult('checkIncomingTroops.pl')).
+:- initialization(consult('checkLocationDetail.pl')).
+:- initialization(consult('checkPlayerDetail.pl')).
+:- initialization(consult('checkPlayerTerritories.pl')).

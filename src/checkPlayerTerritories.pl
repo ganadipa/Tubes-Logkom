@@ -1,11 +1,3 @@
-main:-
-    ['wilayah.pl'],
-    add_player_name(p1, 'Azmi'),
-    add_player_name(p2, 'Fio'),
-    add_player_name(p3, 'Gana'),
-    checkPlayerTerritories(p2).
-
-
 
 checkPlayerTerritories(Player):-
     player_name(Player, Name),
