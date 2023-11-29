@@ -1,4 +1,4 @@
-:- ['wilayah.pl'].
+
 checkPlayerDetail(Player):-
     player_to_string(Player, String),
     write('\nPLAYER '),

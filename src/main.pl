@@ -25,6 +25,7 @@
 :- initialization(consult('next_player.pl')).
 
 % Wilayah dan Player
+:- initialization(consult('wilayah.pl')).
 :- initialization(consult('checkIncomingTroops.pl')).
 :- initialization(consult('checkLocationDetail.pl')).
 :- initialization(consult('checkPlayerDetail.pl')).

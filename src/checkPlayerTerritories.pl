@@ -61,17 +61,3 @@ checkPlayerTerritories(Player):-
             writeRegionsOwned(Name, africa)
         ); !
     ).
-
-
-
-
-
-
-
-
-
-
-
-
-
-:- initialization(main).

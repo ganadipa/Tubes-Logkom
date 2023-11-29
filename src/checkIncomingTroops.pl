@@ -6,7 +6,7 @@ checkIncomingTroops(Player):-
     write(Name),
 
     write('\nTotal wilayah                        :  '),
-    region_owned_length(Nama, TotalWilayah),
+    region_owned_length(Name, TotalWilayah),
     write(TotalWilayah),
 
     write('\nJumlah tentara tambahan dari wilayah :  '),
