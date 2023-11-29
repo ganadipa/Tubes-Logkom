@@ -1,4 +1,6 @@
 endTurn :-
+    retract(move_count(_)),
+    assertz(move_count(0)),
     current_player(OldPlayer),
     player_name(OldPlayer, OldPlayerName),
     format('Player ~w mengakhiri giliran.\n\n', [OldPlayerName]),
