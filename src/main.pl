@@ -1,6 +1,8 @@
 % Database
-
 :- initialization(consult('database.pl')).
+
+% Map
+:- initialization(consult('displayMap.pl')).
 
 
 % Initiating
@@ -13,8 +15,8 @@
 
 % % Turn
 
-% :- initialization(consult('endTurn.pl')).
-% :- initialization(consult('draft.pl')).
+:- initialization(consult('endTurn.pl')).
+:- initialization(consult('draft.pl')).
 % :- initialization(consult('move.pl')).
 % :- initialization(consult('attack.pl')).
 % :- initialization(consult('risk.pl')).
@@ -23,3 +25,10 @@
 % Other
 
 :- initialization(consult('next_player.pl')).
+
+% Wilayah dan Player
+:- initialization(consult('wilayah.pl')).
+:- initialization(consult('checkIncomingTroops.pl')).
+:- initialization(consult('checkLocationDetail.pl')).
+:- initialization(consult('checkPlayerDetail.pl')).
+:- initialization(consult('checkPlayerTerritories.pl')).

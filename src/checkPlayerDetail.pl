@@ -1,4 +1,4 @@
-:- ['wilayah.pl'].
+
 checkPlayerDetail(Player):-
     player_to_string(Player, String),
     write('\nPLAYER '),
@@ -10,15 +10,15 @@ checkPlayerDetail(Player):-
     write(Nama),
 
     write('\nBenua                  :  '),
-    writeBenua(Nama),
+    writeBenua(Player),
 
     write('\nTotal Wilayah          :  '),
-    region_owned_length(Nama, TotalWilayah),
+    region_owned_length(Player, TotalWilayah),
     write(TotalWilayah),
 
 
     write('\nTotal Tentara Aktif    :  '),
-    total_troops_owned(Nama, TotalActiveTroops),
+    total_troops_owned(Player, TotalActiveTroops),
     write(TotalActiveTroops),
 
 

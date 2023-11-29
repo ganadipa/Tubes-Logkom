@@ -1,12 +1,3 @@
-player_name(p2, 'Azmi').
-region_owner(na1, p2).
-region_owner(na2, p2).
-total_troops(na1, 5).
-total_troops(na2, 10).
-
-main_CIT:-
-    add_additional_troops(p2, 123),
-    checkIncomingTroops(p2).
 
 /* checkIncomingTroops(p2).*/
 checkIncomingTroops(Player):-
@@ -15,7 +6,7 @@ checkIncomingTroops(Player):-
     write(Name),
 
     write('\nTotal wilayah                        :  '),
-    region_owned_length(Nama, TotalWilayah),
+    region_owned_length(Player, TotalWilayah),
     write(TotalWilayah),
 
     write('\nJumlah tentara tambahan dari wilayah :  '),
@@ -23,7 +14,7 @@ checkIncomingTroops(Player):-
     write(TroopsFromRegion),
 
 
-    regions_owned_in_continent(Name, south_america, Count1), 
+    regions_owned_in_continent(Player, south_america, Count1), 
     (
         Count1 == 2 -> (
             write('\nBonus Benua Amerika Selatan: '),
@@ -32,7 +23,7 @@ checkIncomingTroops(Player):-
         ); !
     ),
 
-    regions_owned_in_continent(Name, north_america, Count2), 
+    regions_owned_in_continent(Player, north_america, Count2), 
     (
         Count2 == 4 -> (
             write('\nBonus Benua Amerika Utara: '),
@@ -41,7 +32,7 @@ checkIncomingTroops(Player):-
         ); !
     ),
 
-    regions_owned_in_continent(Name, africa, Count3), 
+    regions_owned_in_continent(Player, africa, Count3), 
     (
         Count3 == 3 -> (
             write('\nBonus Benua Africa: '),
@@ -50,7 +41,7 @@ checkIncomingTroops(Player):-
         ); !
     ),
 
-    regions_owned_in_continent(Name, asia, Count4), 
+    regions_owned_in_continent(Player, asia, Count4), 
     (
         Count4 == 7 -> (
             write('\nBonus Benua Asia: '),
@@ -59,7 +50,7 @@ checkIncomingTroops(Player):-
         ); !
     ),
 
-    regions_owned_in_continent(Name, australia, Count5), 
+    regions_owned_in_continent(Player, australia, Count5), 
     (
         Count5 == 2 -> (
             write('\nBonus Benua Australia: '),
@@ -68,7 +59,7 @@ checkIncomingTroops(Player):-
         ); !
     ),
 
-    regions_owned_in_continent(Name, europe, Count6), 
+    regions_owned_in_continent(Player, europe, Count6), 
     (
         Count6 == 5 -> (
             write('\nBonus Benua Eropa: '),
@@ -81,5 +72,3 @@ checkIncomingTroops(Player):-
     write('\nTotal tentara tambahan               :  '),
     total_additional_troops(Player, TotalAdditionalTroops),
     write(TotalAdditionalTroops).
-
-:- initialization(main_CIT).

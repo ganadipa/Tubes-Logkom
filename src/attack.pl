@@ -155,14 +155,18 @@ update_after_attack(Player1, Player2):-
     (Total1 == 0 -> 
     (
         remove_player(Player1),
-        write('Jumlah wilayah player '),
+        write('\n\nJumlah wilayah player milik '),
         write(Name1),
-        write(' 0. ')
+        write(' adalah sebanyak 0. \n'),
+        write(Name1),
+        write(' keluar dari permainan.')
         ); Total2 == 0 -> (
             remove_player(Player2),
-            write('Jumlah wilayah player '),
+            write('Jumlah wilayah player milik '),
             write(Name2),
-            write(' 0. ')
+            write(' adalah sebanyak 0. \n'),
+            write(Name2),
+            write(' keluar dari permainan.\n')
         );!
     ),
 

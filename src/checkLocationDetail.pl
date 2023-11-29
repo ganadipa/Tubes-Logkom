@@ -1,4 +1,4 @@
-:- ['wilayah.pl'].
+
 checkLocationDetail(Kode):-
 
     write('Kode              :  '),

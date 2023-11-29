@@ -15,6 +15,14 @@
 takeLocation(Region) :-
     !,
     (
+        (region(Region)) -> (
+            !
+        ) ; (
+            write('Wilayah tidak eksis.\n'),
+            fail
+        )
+    ),
+    (
         (region_owner(Region, _)) -> (
             write('Wilayah sudah dikuasai. Tidak bisa mengambil.\n'),
             fail
@@ -23,7 +31,27 @@ takeLocation(Region) :-
     current_player(Player),
     assertz(region_owner(Region, Player)),
     write('Wilayah berhasil dipilih.\n'),
-    next_player.
+
+    retract(total_troops(Region, _)),
+    assertz(total_troops(Region, 1)),
+
+    retract(total_additional_troops(Player, OldAdditionalTroops)),
+    NewAdditionalTroops is OldAdditionalTroops - 1,
+    assertz(total_additional_troops(Player, NewAdditionalTroops)),
+
+
+    next_player,
+    current_player(NewPlayer),
+    format('Giliran Player ~w\n', [NewPlayer]),
+    findall(X, region_owner(X, _), L),
+    length(L, Length),
+    !,
+    (
+        (Length == 24) -> (
+            write('Semua wilayah sudah diambil.\n'),
+            fail
+        ) ; !
+    ).
 
 % % nextTurn adalah fungsi yang mengganti giliran pemain dengan pemain selanjutnya
 % nextTurn :-
