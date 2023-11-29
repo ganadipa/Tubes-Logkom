@@ -10,7 +10,7 @@ move(X1, X2, Y) :-
     write(Player), write(' memindahkan '), write(Y), write(' tentara dari '), write(X1), write(' ke '), write(X2), nl,
     % update_turn_count(Player),
     print_current_status(X1,X2),
-    Next is Now +1
+    Next is Now +1,
     retract(move_count(_)),
     asserta(move_count(Next)),
     next_player.
@@ -70,6 +70,6 @@ transfer_tentara(X1, X2, Y) :-
 /* Predikat untuk mencetak status saat ini */
 print_current_status(X1,X2) :-
     total_troops(X1, TentaraAU1),
-total_troops(X2, TentaraAU2),
-write('Jumlah tentara di '), write(X1), write(': '), write(TentaraAU1), nl,
-write('Jumlah tentara di '), write(X2), write(': '), write(TentaraAU2), nl.
+    total_troops(X2, TentaraAU2),
+    write('Jumlah tentara di '), write(X1), write(': '), write(TentaraAU1), nl,
+    write('Jumlah tentara di '), write(X2), write(': '), write(TentaraAU2), nl.

@@ -1,4 +1,9 @@
 
+% Definisi untuk sum_list
+sum_list([], 0).
+sum_list([X|Xs], Sum) :-
+    sum_list(Xs, RestSum),
+    Sum is X + RestSum.
 
 /* Fase Attack */
 attack :-
@@ -55,7 +60,7 @@ battle(StartRegion, TargetRegion, AttackingTroops) :-
     write('Dadu: '), roll_dice(AttackingTroops, AttackingDice),
     write('Total: '), sum_list(AttackingDice, TotalAttacking), write(TotalAttacking), nl,
     write('Player '), write(Opponent), nl,
-    write('Dadu: '), roll_dice(TotalTentara(TargetRegion), OpponentDice),
+    write('Dadu: '), roll_dice(total_troops(TargetRegion), OpponentDice),
     write('Total: '), sum_list(OpponentDice, TotalOpponent), write(TotalOpponent), nl,
     compare_battle_results(TotalAttacking, TotalOpponent, StartRegion, TargetRegion, AttackingTroops).
 
@@ -86,11 +91,11 @@ valid_defending_troops(_, AttackingTroops) :-
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah: '), read(NewTroops),
     valid_defending_troops(NewTroops, AttackingTroops).
 
-print_current_status(StartRegion,TargetRegion) :-
-    total_tentara(StartRegion, TentaraAU1),
-    total_tentara(TargetRegion, TentaraAU2),
-    write('Jumlah tentara di AU1: '), write(TentaraAU1), nl,
-    write('Jumlah tentara di AU2: '), write(TentaraAU2), nl.
+% print_current_status(StartRegion,TargetRegion) :-
+%     total_tentara(StartRegion, TentaraAU1),
+%     total_tentara(TargetRegion, TentaraAU2),
+%     write('Jumlah tentara di AU1: '), write(TentaraAU1), nl,
+%     write('Jumlah tentara di AU2: '), write(TentaraAU2), nl.
 
 
 remove_player(Player):-
