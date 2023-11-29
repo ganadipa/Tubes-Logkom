@@ -92,5 +92,24 @@ print_current_status(StartRegion,TargetRegion) :-
     write('Jumlah tentara di AU1: '), write(TentaraAU1), nl,
     write('Jumlah tentara di AU2: '), write(TentaraAU2), nl.
 
-update_after_attack:-   
+
+remove_player(Player):-
+    retract(total_player(N)), 
+    N1 is N - 1,              
+    asserta(total_player(N1)),
+    retract(is_dead(Player, _)),
+    asserta(is_dead(Player, 1)).
+
+
+
+update_after_attack(Player1, Player2):-
+    player_name(Player1, Name1),
+    player_name(Player2, Name2),
+    total_regions_owned(Name1, Total1),
+    total_regions_owned(Name2, Total2),
+
+    (Total1 == 0 -> 
+    (remove_player(Player1));!)
+    
+
 

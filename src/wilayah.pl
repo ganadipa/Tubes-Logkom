@@ -62,4 +62,13 @@ writeRegionInfo([H|T]):-
     write('\n'),
     writeRegionInfo(T).
 
+total_regions_owned(Name, Total):-
+    regions_owned_in_continent(Name, south_america, Count1),
+    regions_owned_in_continent(Name, north_america, Count2),
+    regions_owned_in_continent(Name, asia, Count3),
+    regions_owned_in_continent(Name, australia, Count4),
+    regions_owned_in_continent(Name, europe, Count5),
+    regions_owned_in_continent(Name, africa, Count6),
+    Total is Count1 + Count2 + Count3 + Count4 + Count5 + Count6.
+
     
