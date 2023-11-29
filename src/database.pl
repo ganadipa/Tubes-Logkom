@@ -170,10 +170,10 @@ code(e3, 'E3').
 code(e4, 'E4').
 code(e5, 'E5').
 
-continent_to_string(north_america, 'Amerika Utara').
-continent_to_string(south_america, 'Amerika Selatan').
-continent_to_string(europe, 'europe').
-continent_to_string(africa, 'africa').
+continent_to_string(north_america, 'North America').
+continent_to_string(south_america, 'South America').
+continent_to_string(europe, 'Europe').
+continent_to_string(africa, 'Africa').
 continent_to_string(asia, 'Asia').
 continent_to_string(australia, 'Australia').
 
@@ -215,6 +215,13 @@ player(p1).
 player(p2).
 player(p3).
 player(p4).
+
+:- dynamic(is_dead / 2).
+
+:- initialization(assertz(is_dead(p1, 0))).
+:- initialization(assertz(is_dead(p2, 0))).
+:- initialization(assertz(is_dead(p3, 0))).
+:- initialization(assertz(is_dead(p4, 0))).
 
 :- dynamic(total_player / 1).
 
@@ -287,3 +294,33 @@ print_all_additional_troops([(Player, Troops)|T]) :-
 
 :- initialization(assertz(total_troops(au1, 0))).
 :- initialization(assertz(total_troops(au2, 0))).
+
+:- initialization(assertz(total_additional_troops(na1, 0))).
+:- initialization(assertz(total_additional_troops(na2, 0))).
+:- initialization(assertz(total_additional_troops(na3, 0))).
+:- initialization(assertz(total_additional_troops(na4, 0))).
+:- initialization(assertz(total_additional_troops(na5, 0))).
+
+:- initialization(assertz(total_additional_troops(sa1, 0))).
+:- initialization(assertz(total_additional_troops(sa2, 0))).
+
+:- initialization(assertz(total_additional_troops(e1, 0))).
+:- initialization(assertz(total_additional_troops(e2, 0))).
+:- initialization(assertz(total_additional_troops(e3, 0))).
+:- initialization(assertz(total_additional_troops(e4, 0))).
+:- initialization(assertz(total_additional_troops(e5, 0))).
+
+:- initialization(assertz(total_additional_troops(af1, 0))).
+:- initialization(assertz(total_additional_troops(af2, 0))).
+:- initialization(assertz(total_additional_troops(af3, 0))).
+
+:- initialization(assertz(total_additional_troops(a1, 0))).
+:- initialization(assertz(total_additional_troops(a2, 0))).
+:- initialization(assertz(total_additional_troops(a3, 0))).
+:- initialization(assertz(total_additional_troops(a4, 0))).
+:- initialization(assertz(total_additional_troops(a5, 0))).
+:- initialization(assertz(total_additional_troops(a6, 0))).
+:- initialization(assertz(total_additional_troops(a7, 0))).
+
+:- initialization(assertz(total_additional_troops(au1, 0))).
+:- initialization(assertz(total_additional_troops(au2, 0))).
