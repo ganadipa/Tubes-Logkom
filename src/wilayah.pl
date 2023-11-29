@@ -2,7 +2,7 @@
 
 writeBenua(Player) :-
     findall(Continent, 
-            (region_owner(Player, Region), from_continent(Region, Continent)), 
+            (region_owner(Region, Player), from_continent(Region, Continent)), 
             ContinentsList),
     sort(ContinentsList, UniqueContinents),
     print_continents(UniqueContinents).
@@ -14,12 +14,12 @@ print_continents([H|T]) :-
     print_continents(T).
 
 region_owned_length(Player, Length):-
-    findall(Region, region_owner(Player, Region), Regions),
+    findall(Region, region_owner(Region, Player), Regions),
     length(Regions, Length).
 
 total_troops_owned(Player, Total) :-
     findall(Troops, 
-            (region_owner(Player, Region), total_troops(Region, Troops)), 
+            (region_owner(Region, Player), total_troops(Region, Troops)), 
             TroopsList),
     sum_list(TroopsList, Total).
 
