@@ -24,13 +24,13 @@ total_troops_owned(Player, Total) :-
     sum_list(TroopsList, Total).
 
 writeTetangga(X) :-
-    tetangga(X, FirstNeighbor),
+    adjacent(X, FirstNeighbor),
     write(FirstNeighbor),
     writeRestNeighbors(X, FirstNeighbor),
-    write('.').
+    write('.'), !.
 
 writeRestNeighbors(X, PrevNeighbor) :-
-    tetangga(X, Neighbor),
+    adjacent(X, Neighbor),
     Neighbor \= PrevNeighbor,
     write(', '),
     write(Neighbor),
@@ -44,8 +44,8 @@ regions_owned_in_continent(PlayerName, Continent, Count) :-
             Regions),
     length(Regions, Count).
 
-writeRegionsOwned(Name, Continent):-
-    findall(Code, (from_continent(Code, Continent), region_owner(Code, Name)), CodeList),
+writeRegionsOwned(Player, Continent):-
+    findall(Code, (from_continent(Code, Continent), region_owner(Code, Player)), CodeList),
     writeRegionInfo(CodeList).
 
 writeRegionInfo([]).

@@ -1,3 +1,8 @@
+player_to_string(p1, 'P1').
+player_to_string(p2, 'P2').
+player_to_string(p3, 'P3').
+player_to_string(p4, 'P4').
+
 % region
 region(na1).
 region(na2).
@@ -145,6 +150,7 @@ code(na1, 'NA1').
 code(na2, 'NA2').
 code(na3, 'NA3').
 code(na4, 'NA4').
+code(na5, 'NA5').
 
 code(sa1, 'SA1').
 code(sa2, 'SA2').
@@ -181,6 +187,7 @@ region_name(na1, 'Greenland').
 region_name(na2, 'Ontario').
 region_name(na3, 'Yucatan'). 
 region_name(na4, 'California').
+region_name(na5, 'Quebec').
 
 region_name(sa1, 'Amazonas').     
 region_name(sa2, 'Patagonia').
@@ -199,6 +206,9 @@ region_name(a1, 'Bali').
 region_name(a2, 'Phuket').        
 region_name(a3, 'Jeju').          
 region_name(a4, 'Hokkaido').      
+region_name(a5, 'Kyoto').      
+region_name(a6, 'Rajasthan').      
+region_name(a7, 'Siem Reap').      
 
 region_name(au1, 'Queensland').   
 region_name(au2, 'South Island').
