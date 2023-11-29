@@ -29,4 +29,22 @@ next_player :-
             ) ; !
         ) ; !
     ),
-    current_player(CurrentPlayer).
+    current_player(NewPlayer),
+    is_dead(NewPlayer, IsDead),
+    (
+        (IsDead == 1) -> (
+            next_player
+        ) ; !
+    ).
+
+
+% test_player :-
+%     assertz(total_player(3)).
+%     assertz(player_name(p1, 'azmi')),
+%     assertz(player_name(p2, 'randy')),
+%     assertz(player_name(p3, 'emery')),
+%     assertz(current_player(p1)),
+%     assertz(is_dead(p2, 1)).
+
+
+    
