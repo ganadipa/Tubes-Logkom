@@ -27,3 +27,5 @@ takeLocation(a7).
 
 takeLocation(au1).
 takeLocation(au2).
+
+current_player(X).

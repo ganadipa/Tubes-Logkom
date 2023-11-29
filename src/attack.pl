@@ -9,7 +9,7 @@
 attack :-
     current_player(Player),
     write('Sekarang giliran Player '), write(Player), write(' menyerang.'), nl,
-    write('/* PETA */'), nl,
+    displayMap,
     write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), read(StartRegion),
     valid_start_region(StartRegion, Player),
     region_owner(StartRegion, Player),

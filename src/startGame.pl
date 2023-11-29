@@ -162,7 +162,24 @@ startGame :-
         (N >= 4) -> (
             assertz(total_additional_troops(p4, TotalAdditionalTroops))
         ) ; !
-    ).
+    ),
+
+    (
+        N == 2 -> (
+            retract(is_dead(p3, _)),
+            retract(is_dead(p4, _)),
+            asserta(is_dead(p3, 1)),
+            asserta(is_dead(p4, 1))
+        ); 
+        N == 3 -> (
+            retract(is_dead(p4, _)),
+            asserta(is_dead(p4, 1))
+        ); !
+    )
+
+    
+    
+    .
 
 sort_players([], _).
 sort_players([_-Name | T], N) :-
