@@ -29,7 +29,8 @@ apply_risk_effect('SUPER SOLDIER SERUM') :-
     assertz(super_soldier_serum_effect(current_player)).
 % di endturn
 apply_risk_effect('AUXILIARY TROOPS') :-
-    assertz(auxiliary_troops_effect(current_player)).
+    current_player(Player),
+    assertz(auxiliary_troops_effect(Player)).
 
 apply_risk_effect('REBELLION') :-
     current_player(Player),
@@ -38,6 +39,15 @@ apply_risk_effect('REBELLION') :-
     change_region_owner(Region, Player, Opponent),
     write('Terjadi pemberontakan di wilayah '), write(Region),
     write('. Wilayah tersebut beralih ke kekuasaan Player '), write(Opponent), write('.'), nl.
+
+apply_risk_effect('DISEASE OUTBREAK') :-
+    current_player(Player),
+    assertz(disease_outbreak_effect(Player)).
+
+apply_risk_effect('SUPPLY CHAIN ISSUE') :-
+    current_player(Player),
+    assertz(supply_chain_issue_effect(Player)).
+
 pemain_lawan(Player, Opponent) :-
     findall(O, (player(O), O \= Player), Opponents),
     length(Opponents, NumOpponents),
@@ -54,12 +64,6 @@ random_owned_region(Player, Region) :-
     NumOwnedRegions > 0,
     random_between(1, NumOwnedRegions, RandomIndex),
     nth1(RandomIndex, OwnedRegions, Region).
-
-apply_risk_effect('DISEASE OUTBREAK') :-
-    assertz(disease_outbreak_effect(current_player)).
-
-apply_risk_effect('SUPPLY CHAIN ISSUE') :-
-    assertz(supply_chain_issue_effect(current_player)).
 
 print_risk_effect('CEASEFIRE ORDER') :-
     write('Hingga giliran berikutnya, wilayah pemain tidak dapat diserang oleh lawan.'), nl.

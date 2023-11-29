@@ -336,6 +336,10 @@ print_all_additional_troops([(Player, Troops)|T]) :-
 % :- initialization(assertz(total_additional_troops(au1, 0))).
 % :- initialization(assertz(total_additional_troops(au2, 0))).
 
+:- dynamic(move_count / 1).
+:- initialization(assertz(move_count(0))).
+
+
 :- dynamic(has_risk_card/2).
 
 :- dynamic(isDisease/1).
