@@ -42,7 +42,8 @@ takeLocation(Region) :-
 
     next_player,
     current_player(NewPlayer),
-    format('Giliran Player ~w\n', [NewPlayer]),
+    player_name(NewPlayer, NewPlayerName)
+    format('Giliran Player ~w\n', [NewPlayerName]),
     findall(X, region_owner(X, _), L),
     length(L, Length),
     !,
