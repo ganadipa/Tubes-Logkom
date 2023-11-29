@@ -1,4 +1,5 @@
 :- dynamic(dice/2, maxDice/1, tie/1, winner/1).
+:- ['database.pl'].
 
 % validasi jumlah pemain
 readPlayers(N) :-

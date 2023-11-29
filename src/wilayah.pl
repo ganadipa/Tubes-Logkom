@@ -40,12 +40,12 @@ writeRestNeighbors(_, _).
 
 regions_owned_in_continent(PlayerName, Continent, Count) :-
     findall(Region, 
-            (region_owner(PlayerName, Region), from_continent(Region, Continent)), 
+            (region_owner(Region, PlayerName), from_continent(Region, Continent)), 
             Regions),
     length(Regions, Count).
 
 writeRegionsOwned(Name, Continent):-
-    findall(Code, (from_continent(Code, Continent), region_owner(Name, Code)) ,CodeList),
+    findall(Code, (from_continent(Code, Continent), region_owner(Code, Name)) ,CodeList),
     writeRegionInfo(CodeList).
 
 writeRegionInfo([]).
@@ -61,4 +61,5 @@ writeRegionInfo([H|T]):-
     write(Troops),
     write('\n'),
     writeRegionInfo(T).
+
     

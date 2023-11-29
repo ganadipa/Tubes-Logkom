@@ -1,4 +1,4 @@
-:- initialization(consult('database.pl')).
+
 
 /* Fase Attack */
 attack :-
@@ -91,3 +91,6 @@ print_current_status :-
     total_tentara(au2, TentaraAU2),
     write('Jumlah tentara di AU1: '), write(TentaraAU1), nl,
     write('Jumlah tentara di AU2: '), write(TentaraAU2), nl.
+
+update_after_attack:-   
+
