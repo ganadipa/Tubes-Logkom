@@ -1,15 +1,31 @@
-placeTroops(RegionCode, TroopCount) :-
+placeTroops(Region, TroopCount) :-
     current_player(Player),
-    format('~w meletakkan ~w tentara di wilayah ~w.~n', [Player, TroopCount, RegionCode]),
+    region_owner(Region, RegionOwner),
+    !,
+    (
+        (Player \= RegionOwner) -> (
+            write('Wilayah tersebut dimiliki pemain lain.\n'),
+            fail
+        ) ; !
+    ),
+
+    format('~w meletakkan ~w tentara di wilayah ~w.\n', [Player, TroopCount, Region]),
     total_additional_troops(Player, Remaining),
-    total_troops(RegionCode, TotalTroops),
+    total_troops(Region, TotalTroops),
 
 
     NewTotalTroops is TotalTroops + TroopCount,
     RemainingTroops is Remaining - TroopCount,
+    !,
+    (
+        (RemainingTroops < 0) -> (
+            write('Tentara kurang.\n'),
+            fail
+        ) ; !
+    ),
 
-    retract(total_troops(RegionCode, _)),    
-    assertz(total_troops(RegionCode, NewTotalTroops)),
+    retract(total_troops(Region, _)),    
+    assertz(total_troops(Region, NewTotalTroops)),
 
     retract(total_additional_troops(Player, _)),
     assertz(total_additional_troops(Player, RemainingTroops)),
