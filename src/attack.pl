@@ -72,10 +72,10 @@ compare_battle_results(AttackingTotal, OpponentTotal, StartRegion, TargetRegion,
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah '), write(TargetRegion), write(': '), read(DefendingTroops),
     valid_defending_troops(DefendingTroops, AttackingTroops),
     transfer_tentara(StartRegion, TargetRegion, DefendingTroops),
-    print_current_status.
+    print_current_status(StartRegion,TargetRegion).
 compare_battle_results(_, _, StartRegion, TargetRegion, _) :-
     write('Player '), write(Opponent), write(' menang! Sayang sekali penyerangan Anda gagal :('), nl,
-    print_current_status.
+    print_current_status(StartRegion,TargetRegion).
 
 valid_defending_troops(Troops, AttackingTroops) :-
     Troops >= 1,
@@ -86,8 +86,8 @@ valid_defending_troops(_, AttackingTroops) :-
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah: '), read(NewTroops),
     valid_defending_troops(NewTroops, AttackingTroops).
 
-print_current_status :-
-    total_tentara(au1, TentaraAU1),
-    total_tentara(au2, TentaraAU2),
+print_current_status(StartRegion,TargetRegion) :-
+    total_tentara(StartRegion, TentaraAU1),
+    total_tentara(TargetRegion, TentaraAU2),
     write('Jumlah tentara di AU1: '), write(TentaraAU1), nl,
     write('Jumlah tentara di AU2: '), write(TentaraAU2), nl.
