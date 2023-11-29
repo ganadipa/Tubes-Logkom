@@ -45,7 +45,7 @@ regions_owned_in_continent(PlayerName, Continent, Count) :-
     length(Regions, Count).
 
 writeRegionsOwned(Name, Continent):-
-    findall(Code, (from_continent(Code, Continent), region_owner(Code, Name)) ,CodeList),
+    findall(Code, (from_continent(Code, Continent), region_owner(Code, Name)), CodeList),
     writeRegionInfo(CodeList).
 
 writeRegionInfo([]).

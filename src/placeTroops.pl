@@ -34,4 +34,4 @@ placeTroops(Region, TroopCount) :-
     format('Terdapat ~w tentara yang tersisa.\n', [RemainingTroops]),
     next_player,
     current_player(NextPlayer),
-    format('Giliran ~w untuk meletakkan tentaranya\n', NextPlayer).
+    format('Giliran ~w untuk meletakkan tentaranya\n', [NextPlayer]).

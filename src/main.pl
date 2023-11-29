@@ -7,6 +7,8 @@
 
 :- initialization(consult('startGame.pl')).
 :- initialization(consult('takeLocation.pl')).
+:- initialization(consult('placeTroops.pl')).
+:- initialization(consult('placeAutomatic.pl')).
 % % :- initialization(consult('takeLocation.pl')).
 
 % % Turn
