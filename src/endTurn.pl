@@ -49,40 +49,41 @@ endTurn :-
 
     
     (
-        (ONA1 == ONA2, ONA2 == ONA3, ONA3 == ONA4, ONA4 == ONA5) -> (
+        (NewPlayer == ONA1, ONA1 == ONA2, ONA2 == ONA3, ONA3 == ONA4, ONA4 == ONA5) -> (
             NA_Bonus is B_NA
         ) ; (
             NA_Bonus is 0
         )
     ),
-    (   (OSA1 == OSA2) -> (
-            SA_Bonus is B_SA
+    (   (NewPlayer == OSA1, OSA1 == OSA2) -> (
+            SA_Bonus is B_SA,
+            write('Bonus is here!!\n\n')
         ) ; (
             SA_Bonus is 0
         )
     ),
-    (   (OE1 == OE2, OE2 == OE3, OE3 == OE4, OE4 == OE5) -> (
+    (   (NewPlayer == OE1, OE1 == OE2, OE2 == OE3, OE3 == OE4, OE4 == OE5) -> (
             EU_Bonus is B_EU
         ) ; (
             EU_Bonus is 0
         )
     ),  
     (   
-        (OAF1 == OAF2, OAF2 == OAF3) -> (
+        (NewPlayer == OAF1, OAF1 == OAF2, OAF2 == OAF3) -> (
             AF_Bonus is B_AF
         ) ; (
             AF_Bonus is 0
         )
     ),
     (
-        (OA1 == OA2, OA2 == OA3, OA3 == OA4, OA4 == OA5, OA5 == OA6, OA6 == OA7) -> (
+        (NewPlayer == OA1, OA1 == OA2, OA2 == OA3, OA3 == OA4, OA4 == OA5, OA5 == OA6, OA6 == OA7) -> (
             AS_Bonus is B_AS
         ) ; (
             AS_Bonus is 0
         )
     ),
     (
-        (OAU1 == OAU2) -> (
+        (NewPlayer == OAU1, OAU1 == OAU2) -> (
             AU_Bonus is B_AU
         ) ; (
             AU_Bonus is 0
