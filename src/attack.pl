@@ -71,13 +71,24 @@ roll_dice(N, [Die|Dice]) :-
     roll_dice(M, Dice).
 
 compare_battle_results(AttackingTotal, OpponentTotal, StartRegion, TargetRegion, AttackingTroops) :-
+    current_player(Player),
     AttackingTotal > OpponentTotal,
     !,
     write('Player '), write(Player), write(' menang! Wilayah '), write(TargetRegion), write(' sekarang dikuasai oleh Player '), write(Player), write('.'), nl,
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah '), write(TargetRegion), write(': '), read(DefendingTroops),
     valid_defending_troops(DefendingTroops, AttackingTroops),
+    
+
+    retract(region_owner(TargetRegion, _)),
+    asserta(region_owner(TargetRegion, P)),
     transfer_tentara(StartRegion, TargetRegion, DefendingTroops),
-    print_current_status(StartRegion,TargetRegion).
+    print_current_status(StartRegion,TargetRegion),
+
+
+    /*sekalian tranfer kepemilikan.*/
+    update_after_attack().
+
+
 compare_battle_results(_, _, StartRegion, TargetRegion, _) :-
     write('Player '), write(Opponent), write(' menang! Sayang sekali penyerangan Anda gagal :('), nl,
     print_current_status(StartRegion,TargetRegion).
@@ -114,7 +125,34 @@ update_after_attack(Player1, Player2):-
     total_regions_owned(Name2, Total2),
 
     (Total1 == 0 -> 
-    (remove_player(Player1));!)
+    (
+        remove_player(Player1),
+        write('Jumlah wilayah player '),
+        write(Name1),
+        write(' 0. ')
+        ); Total2 == 0 -> (
+            remove_player(Player2),
+            write('Jumlah wilayah player '),
+            write(Name2),
+            write(' 0. ')
+        );!
+    ),
+
+    (
+        Total1 == 24 -> (
+            write('********************\n*'),
+            write(Name1), 
+            write(' telah menguasai dunia'),
+            write('*\n********************')
+        ); Total2 == 24 -> (
+            write('********************\n*'),
+            write(Name2), 
+            write(' telah menguasai dunia'),
+            write('*\n********************')
+        )
+    ).
+
+
     
 
 

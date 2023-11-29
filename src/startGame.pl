@@ -8,7 +8,10 @@ readPlayers(N) :-
     read(N),
     (between(2, 4, N), !;
      write('Mohon masukkan angka antara 2 - 4.\n'),
-     fail).
+     fail),
+    retractall(current_player(_)),
+    asserta(current_player(N)).
+
 
 % inisialisasi pemain
 initPlayers(Current, N) :-
@@ -23,7 +26,19 @@ initPlayers(Current, N) :-
 readPlayerName(Current) :-
     format('Masukkan nama pemain ~w: ', [Current]),
     read(Name),
-    asserta(player_name(Current, Name)).
+    (   Current == 1 ->
+        retractall(player_name(p1, _)),
+        asserta(player_name(p1, Name))
+    ;   Current == 2 ->
+        retractall(player_name(p2, _)),
+        asserta(player_name(p2, Name))
+    ;   Current == 3 ->
+        retractall(player_name(p3, _)),
+        asserta(player_name(p3, Name))
+    ;   Current == 4 ->
+        retractall(player_name(p4, _)),
+        asserta(player_name(p4, Name))
+    ).
 
 % kocok dadu
 rollDiceForPlayers :-
@@ -107,6 +122,7 @@ calculateTroops(4, 12).
 
 % fungsi start game
 startGame :-
+    retractall(player_name(_,_)),
     readPlayers(N),
     initPlayers(1, N),
     write('\n'),
