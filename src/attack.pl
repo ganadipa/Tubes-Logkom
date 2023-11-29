@@ -1,9 +1,9 @@
 
 % Definisi untuk sum_list
-sum_list([], 0).
-sum_list([X|Xs], Sum) :-
-    sum_list(Xs, RestSum),
-    Sum is X + RestSum.
+% sum_list([], 0).
+% sum_list([X|Xs], Sum) :-
+%     sum_list(Xs, RestSum),
+%     Sum is X + RestSum.
 
 /* Fase Attack */
 attack :-
@@ -12,7 +12,7 @@ attack :-
     write('/* PETA */'), nl,
     write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), read(StartRegion),
     valid_start_region(StartRegion, Player),
-    pemilik_wilayah(Player, StartRegion),
+    region_owner(Player, StartRegion),
     total_tentara(StartRegion, StartRegionTentara),
     StartRegionTentara > 1,
     write('Dalam daerah '), write(StartRegion), write(', Anda memiliki sebanyak '), write(StartRegionTentara), write(' tentara.'), nl,
@@ -25,7 +25,7 @@ attack :-
     battle(StartRegion, TargetRegion, AttackingTroops).
 
 valid_start_region(Region, Player) :-
-    pemilik_wilayah(Player, Region),
+    region_owner(Player, Region),
     !.
 valid_start_region(_, Player) :-
     write('Daerah tidak valid. Silahkan input kembali.'), nl,
@@ -43,10 +43,17 @@ valid_attacking_troops(_, MaxTroops) :-
 
 valid_target_region(TargetRegion, StartRegion) :-
     current_player(Player),
-    pemilik_wilayah(Opponent, TargetRegion),
+    region_owner(Opponent, TargetRegion),
+    \+casefire_order_effect(Opponent),
     Opponent \= Player,
     tetangga(StartRegion, TargetRegion),
     !.
+valid_target_region(TargetRegion, StartRegion) :-
+    current_player(Player),
+    region_owner(Opponent, TargetRegion),
+    casefire_order_effect(Opponent),
+    write('Tidak Bisa Menyerang'),nl,write('wilayah sedang dalam pengaruh CEASEFIRE ORDER'),
+    !.   
 valid_target_region(_, StartRegion) :-
     write('Daerah yang diserang tidak valid. Silahkan input kembali.'), nl,
     write('Pilihlah daerah yang ingin Anda serang: '), read(NewTargetRegion),
@@ -54,7 +61,7 @@ valid_target_region(_, StartRegion) :-
 
 battle(StartRegion, TargetRegion, AttackingTroops) :-
     current_player(Player),
-    pemilik_wilayah(Opponent,TargetRegion),
+    region_owner(Opponent,TargetRegion),
     write('Perang telah dimulai.'), nl,
     write('Player '), write(Player), nl,
     write('Dadu: '), roll_dice(AttackingTroops, AttackingDice),
@@ -66,32 +73,47 @@ battle(StartRegion, TargetRegion, AttackingTroops) :-
 
 roll_dice(0, []).
 roll_dice(N, [Die|Dice]) :-
+    super_soldier_serum_effect(current_player),  % Pemeriksaan pengaruh super_soldier_serum_effect
+    Die = 6,  % Jika dalam pengaruh, set dadu menjadi 6
+    M is N - 1,
+    roll_dice(M, Dice).
+roll_dice(N, [Die|Dice]) :-
+    \+ super_soldier_serum_effect(current_player),  % Jika tidak dalam pengaruh
     random_between(1, 6, Die),
     M is N - 1,
     roll_dice(M, Dice).
 
 compare_battle_results(AttackingTotal, OpponentTotal, StartRegion, TargetRegion, AttackingTroops) :-
-    current_player(Player),
     AttackingTotal > OpponentTotal,
     !,
+    region_owner(StartRegion,Player),
+    region_owner(TargetRegion,Opponent),
+    write('Perang telah dimulai.'), nl,
+    write('Player '), write(Player), nl,
+    write('Dadu: '), roll_dice(AttackingTroops, AttackingDice),
+    write_dice_results(AttackingDice),  % Menampilkan hasil dadu
+    sum_list(AttackingDice, TotalAttacking), write('Total: '), write(TotalAttacking), nl,
+    write('Player '), write(Opponent), nl,
+    write('Dadu: '), roll_dice(total_troops(TargetRegion), OpponentDice),
+    write_dice_results(OpponentDice),  % Menampilkan hasil dadu lawan
+    sum_list(OpponentDice, TotalOpponent), write('Total: '), write(TotalOpponent), nl,
     write('Player '), write(Player), write(' menang! Wilayah '), write(TargetRegion), write(' sekarang dikuasai oleh Player '), write(Player), write('.'), nl,
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah '), write(TargetRegion), write(': '), read(DefendingTroops),
     valid_defending_troops(DefendingTroops, AttackingTroops),
-    
-
-    retract(region_owner(TargetRegion, _)),
-    asserta(region_owner(TargetRegion, P)),
     transfer_tentara(StartRegion, TargetRegion, DefendingTroops),
     print_current_status(StartRegion,TargetRegion),
-
+    update_after_attack(Player,Opponent).
 
     /*sekalian tranfer kepemilikan.*/
-    update_after_attack().
-
-
+    
 compare_battle_results(_, _, StartRegion, TargetRegion, _) :-
+    region_owner(TargetRegion,Opponent),
     write('Player '), write(Opponent), write(' menang! Sayang sekali penyerangan Anda gagal :('), nl,
     print_current_status(StartRegion,TargetRegion).
+write_dice_results([]).
+write_dice_results([Die|Dice]) :-
+    write('Dadu: '), write(Die), nl,
+    write_dice_results(Dice).
 
 valid_defending_troops(Troops, AttackingTroops) :-
     Troops >= 1,
@@ -101,21 +123,17 @@ valid_defending_troops(_, AttackingTroops) :-
     write('Banyak tentara tidak valid. Silahkan input kembali.'), nl,
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah: '), read(NewTroops),
     valid_defending_troops(NewTroops, AttackingTroops).
-
 % print_current_status(StartRegion,TargetRegion) :-
 %     total_tentara(StartRegion, TentaraAU1),
 %     total_tentara(TargetRegion, TentaraAU2),
 %     write('Jumlah tentara di AU1: '), write(TentaraAU1), nl,
 %     write('Jumlah tentara di AU2: '), write(TentaraAU2), nl.
-
-
 remove_player(Player):-
     retract(total_player(N)), 
     N1 is N - 1,              
     asserta(total_player(N1)),
     retract(is_dead(Player, _)),
     asserta(is_dead(Player, 1)).
-
 
 
 update_after_attack(Player1, Player2):-

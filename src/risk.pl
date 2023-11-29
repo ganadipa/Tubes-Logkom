@@ -19,11 +19,11 @@ random_risk_card(Card) :-
     random_member(Card, Cards).
 
 apply_risk_effect('CEASEFIRE ORDER') :-
-    assertz(casefire_order_effect(current_player)),
-    retract(allowed_moves(Player, _)),
-    assertz(allowed_moves(Player, 0)),
-    retract(allowed_moves(_, _)),
-    assertz(allowed_moves(_, 0)).
+    assertz(casefire_order_effect(current_player)).
+    % retract(allowed_moves(Player, _)),
+    % assertz(allowed_moves(Player, 0)),
+    % retract(allowed_moves(_, _)),
+    % assertz(allowed_moves(_, 0)).
 
 apply_risk_effect('SUPER SOLDIER SERUM') :-
     assertz(super_soldier_serum_effect(current_player)).
@@ -59,8 +59,7 @@ apply_risk_effect('DISEASE OUTBREAK') :-
     assertz(disease_outbreak_effect(current_player)).
 
 apply_risk_effect('SUPPLY CHAIN ISSUE') :-
-    retract(total_additional_troops(Player, _)),
-    assertz(total_additional_troops(Player, 0)).
+    assertz(supply_chain_issue_effect(current_player)).
 
 print_risk_effect('CEASEFIRE ORDER') :-
     write('Hingga giliran berikutnya, wilayah pemain tidak dapat diserang oleh lawan.'), nl.
