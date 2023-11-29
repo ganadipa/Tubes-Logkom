@@ -87,7 +87,6 @@ updateTie(_, _).
 % urutan pemain
 sortPlayers :-
     findall(Dice-Name, dice(Name, Dice), Pairs),
-    update_players(Pairs),
     keysort(Pairs, NewPairs),
     reverse(NewPairs, SortedPairs),
     findall(Winner, winner(Winner), Winners),
@@ -95,6 +94,7 @@ sortPlayers :-
     write('\n'),
     write('Urutan pemain berdasarkan nilai dadu: '),
     printPlayerNames(SortedPairs, Winner),
+    update_players(SortedPairs),
     write('\n').
 
 % print urutan pemain dan urutan pertama
