@@ -86,3 +86,10 @@ print_risk_effect('SUPPLY CHAIN ISSUE') :-
 random_owned_region(Player, Region) :-
     findall(R, (region(R), pemilik_wilayah(Player, R)), Regions),
     random_member(Region, Regions).
+random_member(X, List) :-
+    length(List, Length),
+    Length > 0,
+    random(1, Length, Index),
+    nth1(Index, List, X).
+
+risk_cards(['CEASEFIRE ORDER', 'SUPER SOLDIER SERUM', 'AUXILIARY TROOPS', 'REBELLION', 'DISEASE OUTBREAK', 'SUPPLY CHAIN ISSUE']).
