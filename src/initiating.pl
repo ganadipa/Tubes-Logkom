@@ -1,4 +1,4 @@
-:- dynamic(dice/2, maxDice/1, tie/1, winner/1, turn/1).
+:- dynamic(dice/2, maxDice/1, tie/1, winner/1, turn/1, sum_troops/2).
 
 % validasi jumlah pemain
 readPlayers(N) :-
@@ -144,12 +144,15 @@ nextTurn :-
     retract(turn(Current)),
     assertz(turn(Current)),
     turn(Next),
-    (   region_owner(_, Next)
-    ->  write('Giliran '), write(Next), write(' untuk memilih wilayahnya.'), nl
-    ;   write('Seluruh wilayah telah diambil pemain.'), nl,
-        write('Memulai pembagian sisa tentara.'), nl,
-        write('Giliran '), write(Next), (' untuk meletakkan tentaranya.'), nl,
+    findall(R, region(R), Regions),
+    length(Regions, N),
+    (   N =:= 0
+    ->  write('Seluruh wilayah telah diambil pemain.'), nl,
+        write('Memulai pembagian sisa tentara.'), nl
+    ;   write('Giliran '), write(Next), write(' untuk memilih wilayahnya.'), nl
     ).
+
+
 
 % takeLocation(Loc) adalah fungsi yang memungkinkan pemain untuk mengambil wilayah Loc
 
@@ -170,3 +173,42 @@ takeLocation(Loc) :-
     write('Wilayah sudah dikuasai. Tidak bisa mengambil.'), nl,
     write('Giliran '), write(Player), write(' untuk memilih wilayahnya.'), nl,
     !.
+
+
+% Fakta yang menyatakan jumlah tentara awal untuk setiap jumlah pemain
+initial_troops(2, 12). % Jika ada 2 pemain, masing-masing memiliki 12 tentara
+initial_troops(3, 8).  % Jika ada 3 pemain, masing-masing memiliki 8 tentara
+initial_troops(4, 6).  % Jika ada 4 pemain, masing-masing memiliki 6 tentara
+
+% Fakta yang menyimpan jumlah tentara yang dimiliki oleh setiap pemain
+sum_troops(player1, 8). % Misalnya, pemain1 memiliki 0 tentara awalnya
+sum_troops(player2, 8). % Misalnya, pemain2 memiliki 0 tentara awalnya
+% Definisikan sum_troops untuk pemain lain sesuai kebutuhan
+
+
+% Predikat untuk menginisialisasi jumlah tentara yang tersisa untuk setiap pemain
+init_troops :-
+    findall(Name, player_name(_, Name), Players),
+    length(Players, N),
+    initial_troops(N, T), % Mencari jumlah tentara awal untuk jumlah pemain tersebut
+    init_troops(Players, T). % Menginisialisasi jumlah tentara yang tersisa untuk setiap pemain
+
+placeTroops(RegionCode, TroopCount) :-
+    current_player(Player),
+    format('~w meletakkan ~w tentara di wilayah ~w.~n', [Player, TroopCount, RegionCode]),
+    total_troops(RegionCode, TotalTroops),
+    NewTotalTroops is TotalTroops + TroopCount,
+    retract(total_troops(RegionCode, _)),
+    assertz(total_troops(RegionCode, NewTotalTroops)),
+    update_additional_troops(Player, TroopCount),
+    query_additional_troops(Player, RemainingTroops),
+    format('Terdapat ~w tentara yang tersisa.~n', [RemainingTroops]),
+    next_player.
+
+
+
+
+    
+    
+
+
