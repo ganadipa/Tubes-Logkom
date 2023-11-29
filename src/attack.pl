@@ -30,8 +30,8 @@ attack :-
     displayMap,
     
     write('Pilihlah daerah yang ingin Anda serang: '), read(TargetRegion),
-    valid_target_region(TargetRegion,Player, StartRegion),
-    battle(StartRegion, TargetRegion, AttackingTroops).
+    valid_target_region(TargetRegion, Player, ValidatedStartRegion),
+    battle(ValidatedStartRegion, TargetRegion, ValidatedAttackingTroops).
 
 valid_start_region(Region, Player, Validated) :-
     (
@@ -61,9 +61,9 @@ valid_attacking_troops(Troops, MaxTroops, Validated) :-
         (
             write('Banyak tentara tidak valid. Silahkan input kembali.'), nl,
             write('Masukkan banyak tentara yang akan bertempur: '), read(NewTroops), valid_attacking_troops(NewTroops, MaxTroops, NewValidated),
-            V = NewValidated; 
+            V = NewValidated
+        );
             V = Troops, !
-        )
     ),
     Validated = V.
 
