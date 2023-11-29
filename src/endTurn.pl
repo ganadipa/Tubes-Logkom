@@ -91,7 +91,23 @@ endTurn :-
             AU_Bonus is 0
         )
     ),
-    TotalAdditionalTroops is TotalRegionPerTwo + NA_Bonus + SA_Bonus + EU_Bonus + AF_Bonus + AS_Bonus + AU_Bonus,
+    !,
+    (
+        (supply_chain_issue_effect(NewPlayer)) -> (
+            write('Anda terkena Supply Chain Issue. Anda tidak akan mendapatkan tentara tambahan pada giliran berikutnya.\n'),
+            retract(supply_chain_issue_effect(NewPlayer)),
+            fail
+        ) ; !
+    ),
+    (
+        (auxiliary_troops_effect(NewPlayer)) -> (
+            write('Anda terkena auxiliary troops effect. Anda akan mendapatkan 2 kali lipat.\n'),
+            retract(auxiliary_troops_effect(NewPlayer)),
+            TotalAdditionalTroops is 2 * (TotalRegionPerTwo + NA_Bonus + SA_Bonus + EU_Bonus + AF_Bonus + AS_Bonus + AU_Bonus)
+        ) ; (
+            TotalAdditionalTroops is (TotalRegionPerTwo + NA_Bonus + SA_Bonus + EU_Bonus + AF_Bonus + AS_Bonus + AU_Bonus)
+        )
+    ),
     format('Player ~w mendapat ~w tentara tambahan.\n', [NewPlayerName, TotalAdditionalTroops]),
     total_additional_troops(NewPlayer, OldAdditionalTroops),
     NewAdditionalTroops is OldAdditionalTroops + TotalAdditionalTroops,
