@@ -48,7 +48,9 @@ rollDiceForPlayers :-
 
 rollDiceForPlayers([]).
 rollDiceForPlayers([Player | Rest]) :-
-    random(1, 13, DiceRoll),
+    random(1, 7, DiceRoll1),
+    random(1, 7, DiceRoll2),
+    DiceRoll is DiceRoll1 + DiceRoll2,
     asserta(dice(Player, DiceRoll)),
     format('~w melempar dadu dan mendapatkan ~w.\n', [Player, DiceRoll]),
     rollDiceForPlayers(Rest),
