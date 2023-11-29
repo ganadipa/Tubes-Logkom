@@ -8,8 +8,8 @@ readPlayers(N) :-
     (between(2, 4, N), !;
      write('Mohon masukkan angka antara 2 - 4.\n'),
      fail),
-    retractall(current_player(_)),
-    asserta(current_player(N)).
+    retractall(total_player(_)),
+    asserta(total_player(N)).
 
 
 % inisialisasi pemain
@@ -134,4 +134,23 @@ startGame :-
     write('\n'),
     findall(Winner, winner(Winner), Winners),
     (Winners = [SingleWinner] -> Winner = SingleWinner; Winner = Winners),
-    printFirstTurn(Winner).
+    printFirstTurn(Winner),
+    player_name(Player, Winner),
+    assertz(current_player(Player)),
+    calculateTroops(N, TotalAdditionalTroops),
+    assertz(total_additional_troops(p1, TotalAdditionalTroops)),
+    (
+        (N >= 2) -> (
+            assertz(total_additional_troops(p2, TotalAdditionalTroops))
+        ) ; !
+    ),
+    (
+        (N >= 3) -> (
+            assertz(total_additional_troops(p3, TotalAdditionalTroops))
+        ) ; !
+    ),
+    (
+        (N >= 4) -> (
+            assertz(total_additional_troops(p4, TotalAdditionalTroops))
+        ) ; !
+    ).

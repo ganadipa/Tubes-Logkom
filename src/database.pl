@@ -295,32 +295,33 @@ print_all_additional_troops([(Player, Troops)|T]) :-
 :- initialization(assertz(total_troops(au1, 0))).
 :- initialization(assertz(total_troops(au2, 0))).
 
-:- initialization(assertz(total_additional_troops(na1, 0))).
-:- initialization(assertz(total_additional_troops(na2, 0))).
-:- initialization(assertz(total_additional_troops(na3, 0))).
-:- initialization(assertz(total_additional_troops(na4, 0))).
-:- initialization(assertz(total_additional_troops(na5, 0))).
 
-:- initialization(assertz(total_additional_troops(sa1, 0))).
-:- initialization(assertz(total_additional_troops(sa2, 0))).
+% :- initialization(assertz(total_additional_troops(na1, 0))).
+% :- initialization(assertz(total_additional_troops(na2, 0))).
+% :- initialization(assertz(total_additional_troops(na3, 0))).
+% :- initialization(assertz(total_additional_troops(na4, 0))).
+% :- initialization(assertz(total_additional_troops(na5, 0))).
 
-:- initialization(assertz(total_additional_troops(e1, 0))).
-:- initialization(assertz(total_additional_troops(e2, 0))).
-:- initialization(assertz(total_additional_troops(e3, 0))).
-:- initialization(assertz(total_additional_troops(e4, 0))).
-:- initialization(assertz(total_additional_troops(e5, 0))).
+% :- initialization(assertz(total_additional_troops(sa1, 0))).
+% :- initialization(assertz(total_additional_troops(sa2, 0))).
 
-:- initialization(assertz(total_additional_troops(af1, 0))).
-:- initialization(assertz(total_additional_troops(af2, 0))).
-:- initialization(assertz(total_additional_troops(af3, 0))).
+% :- initialization(assertz(total_additional_troops(e1, 0))).
+% :- initialization(assertz(total_additional_troops(e2, 0))).
+% :- initialization(assertz(total_additional_troops(e3, 0))).
+% :- initialization(assertz(total_additional_troops(e4, 0))).
+% :- initialization(assertz(total_additional_troops(e5, 0))).
 
-:- initialization(assertz(total_additional_troops(a1, 0))).
-:- initialization(assertz(total_additional_troops(a2, 0))).
-:- initialization(assertz(total_additional_troops(a3, 0))).
-:- initialization(assertz(total_additional_troops(a4, 0))).
-:- initialization(assertz(total_additional_troops(a5, 0))).
-:- initialization(assertz(total_additional_troops(a6, 0))).
-:- initialization(assertz(total_additional_troops(a7, 0))).
+% :- initialization(assertz(total_additional_troops(af1, 0))).
+% :- initialization(assertz(total_additional_troops(af2, 0))).
+% :- initialization(assertz(total_additional_troops(af3, 0))).
 
-:- initialization(assertz(total_additional_troops(au1, 0))).
-:- initialization(assertz(total_additional_troops(au2, 0))).
+% :- initialization(assertz(total_additional_troops(a1, 0))).
+% :- initialization(assertz(total_additional_troops(a2, 0))).
+% :- initialization(assertz(total_additional_troops(a3, 0))).
+% :- initialization(assertz(total_additional_troops(a4, 0))).
+% :- initialization(assertz(total_additional_troops(a5, 0))).
+% :- initialization(assertz(total_additional_troops(a6, 0))).
+% :- initialization(assertz(total_additional_troops(a7, 0))).
+
+% :- initialization(assertz(total_additional_troops(au1, 0))).
+% :- initialization(assertz(total_additional_troops(au2, 0))).
