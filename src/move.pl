@@ -38,7 +38,7 @@ move(X1, X2, Y) :-
     NewX1 is OldX1 - Y,
     total_troops(X2, OldX2),
     NewX2 is OldX2 + Y,
-
+    write(Player), write(' memindahkan '), write(Y), write(' tentara dari '), write(X1), write(' ke '), write(X2), nl,
     retract(total_troops(X1, _)),
     retract(total_troops(X2, _)),
     assertz(total_troops(X1, NewX1)),
