@@ -1,6 +1,7 @@
 
 /* checkIncomingTroops(p2).*/
 checkIncomingTroops(Player):-
+    player_validator(Player, 'Invalid input.'),
     write('\nNama                                 :  '),
     player_name(Player, Name),
     write(Name),

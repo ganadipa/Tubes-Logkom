@@ -1,6 +1,7 @@
 
 checkLocationDetail(Kode):-
 
+    code_validator(Kode, 'Invalid input'),
     write('Kode              :  '),
     code(Kode, X),
     write(X),

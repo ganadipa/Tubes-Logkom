@@ -35,7 +35,8 @@ next_player :-
         (IsDead == 1) -> (
             next_player
         ) ; !
-    ).
+    ),
+    print_players_info.
 
 
 % test_player :-

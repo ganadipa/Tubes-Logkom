@@ -47,7 +47,11 @@ code_validator(Code, String):-
         ); true
     ).
 
-print_players_info :-
+print_players_info:-
+    write('\n\nPLAYER TURN DETAILS:\n'),
+    print_players_info_helper.
+
+print_players_info_helper :-
     player_name(Player, Name),
     format('~w is ~w ', [Player, Name]),
     (

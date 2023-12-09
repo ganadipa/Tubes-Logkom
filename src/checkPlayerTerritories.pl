@@ -1,5 +1,6 @@
 
 checkPlayerTerritories(Player):-
+    player_validator(Player, 'Invalid input.'),
     player_name(Player, Name),
     write('Nama               :  '),
     write(Name),
