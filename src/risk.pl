@@ -1,10 +1,6 @@
 
 /* Fase Risk */
-risk :-
-    current_player(Player),
-    has_risk_card(Player),
-    write('Anda sudah memiliki risk card pada giliran ini.'), nl,
-    !.
+
 
 risk :-
     current_player(Player),
