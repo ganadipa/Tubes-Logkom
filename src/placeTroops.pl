@@ -1,4 +1,7 @@
 placeTroops(Region, TroopCount) :-
+    total_additional_troops(Player, Remaining),
+    int_validator(0, Remaining, TroopCount, 'Ngaco troopcountnya'),
+    
     current_player(Player),
     region_owner(Region, RegionOwner),
     !,
@@ -10,7 +13,6 @@ placeTroops(Region, TroopCount) :-
     ),
 
     format('~w meletakkan ~w tentara di wilayah ~w.\n', [Player, TroopCount, Region]),
-    total_additional_troops(Player, Remaining),
     total_troops(Region, TotalTroops),
 
 

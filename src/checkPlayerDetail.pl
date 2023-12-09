@@ -1,5 +1,7 @@
 
 checkPlayerDetail(Player):-
+
+    player_validator(Player, 'Ini bukan manusia'),  
     player_to_string(Player, String),
     write('\nPLAYER '),
     write(String),

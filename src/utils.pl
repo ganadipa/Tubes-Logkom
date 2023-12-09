@@ -14,17 +14,20 @@ int_validator(Min, Max, Value, String) :-
     ).
 
 player_validator(Player, String) :-
+    (
+        \+ player(Player) -> (
+            write(String), fail
+        ); !
+    ),
     total_player(Total),
     (
         Total == 2 -> 
         (   
-            (Player == p3; Player == p4) -> 
+            (Player == p3; Player == p4) ->  
             (
                 write(String),
                 fail
-            )
-
-        ;   true
+            ); true
         ); Total == 3 -> 
         (
             (Player == p4) -> 
@@ -44,3 +47,11 @@ code_validator(Code, String):-
         ); true
     ).
 
+print_players_info :-
+    player_name(Player, Name),
+    format('~w is ~w ', [Player, Name]),
+    (
+        current_player(Player) -> write('<- Now turn'); true
+    ),
+    format('~n', []),
+    fail.
