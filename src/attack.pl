@@ -21,8 +21,8 @@ attack :-
     write('Player '), write(Player), write(' mengirim sebanyak '), write(ValidatedAttackingTroops), write(' tentara untuk berperang.'), nl, nl,
     displayMap,
     write('Pilihlah daerah yang ingin Anda serang: '), read(TargetRegion),
-    valid_target_region(TargetRegion, Player, ValidatedStartRegion),
-    battle(ValidatedStartRegion, TargetRegion, ValidatedAttackingTroops).
+    valid_target_region(TargetRegion, Player, ValidatedStartRegion, N),
+    battle(ValidatedStartRegion, N, ValidatedAttackingTroops).
 
 valid_start_region(Region, Player, Validated) :-
     (
@@ -70,23 +70,29 @@ valid_attacking_troops(_,MaxTroops) :-
     write('Masukkan banyak tentara yang akan bertempur: '), read(NewTroops),
     valid_attacking_troops(NewTroops, MaxTroops).
 
-valid_target_region(TargetRegion,Player, StartRegion) :-
-    current_player(Player),
+% valid_target_region(TargetRegion,Player,StartRegion) :-
+%     (
+%         region_owner(TargetRegion,Opponent),casefire_order_effect(Opponent),
+%     )
+
+
+valid_target_region(TargetRegion,Player, StartRegion,N) :-
     region_owner(TargetRegion, Opponent),
     \+casefire_order_effect(Opponent),
     Opponent \= Player,
     adjacent(StartRegion, TargetRegion),
+    N = TargetRegion,
     !.
-valid_target_region(TargetRegion,Player, StartRegion) :-
-    current_player(Player),
-    region_owner(TargetRegion, Opponent),
-    casefire_order_effect(Opponent),
-    write('Tidak Bisa Menyerang'),nl,write('wilayah sedang dalam pengaruh CEASEFIRE ORDER'),
-    !.   
-valid_target_region(_,Player, StartRegion) :-
-    write('Daerah yang diserang tidak valid. Silahkan input kembali.'), nl,
-    write('Pilihlah daerah yang ingin Anda serang: '), read(NewTargetRegion),
-    valid_target_region(NewTargetRegion,Player ,StartRegion).
+% valid_target_region(TargetRegion,Player, StartRegion) :-
+%     region_owner(TargetRegion, Opponent),
+%     casefire_order_effect(Opponent),
+%     write('Tidak Bisa Menyerang'),nl,write('wilayah sedang dalam pengaruh CEASEFIRE ORDER'),
+%     fail.   
+valid_target_region(TargetRegion,Player, StartRegion,N) :-
+    write('Daerah yang diserang tidak valid(ceasefire atau tidak adjacent). Silahkan input kembali. '), nl,
+    write('Pilihlah daerah yang ingin Anda serang:  '), read(NewTargetRegion),
+    New = N,
+    valid_target_region(NewTargetRegion,Player ,StartRegion,N).
 
 battle(StartRegion, TargetRegion, AttackingTroops) :-
     current_player(Player),
@@ -152,8 +158,9 @@ compare_battle_results(AttackingTotal, OpponentTotal, StartRegion, TargetRegion,
     region_owner(TargetRegion,Opponent),
     write('Player '), write(Player), write(' menang! Wilayah '), write(TargetRegion), write(' sekarang dikuasai oleh Player '), write(Player), write('.'), nl,
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah '), write(TargetRegion), write(': '), read(DefendingTroops),
-    valid_defending_troops(DefendingTroops, AttackingTroops),
-    transfer_tentara(StartRegion, TargetRegion, DefendingTroops),
+    valid_defending_troops(DefendingTroops, AttackingTroops,N),
+    retract(total_troops(TargetRegion,_)),
+    transfer_tentara(StartRegion, TargetRegion, N),
     retract(region_owner(TargetRegion,Opponent)),
     assertz(region_owner(TargetRegion,Player)),
     print_current_status(StartRegion,TargetRegion),
@@ -170,14 +177,15 @@ compare_battle_results(_, _, StartRegion, TargetRegion, AttackingTroops) :-
     write('Player '), write(Opponent), write(' menang! Sayang sekali penyerangan Anda gagal :('), nl,
     print_current_status(StartRegion,TargetRegion).
 
-valid_defending_troops(Troops, AttackingTroops) :-
+valid_defending_troops(Troops, AttackingTroops,N) :-
     Troops >= 1,
     Troops =< AttackingTroops,
+    N=Troops,
     !.
-valid_defending_troops(_, AttackingTroops) :-
+valid_defending_troops(_, AttackingTroops,N) :-
     write('Banyak tentara tidak valid. Silahkan input kembali.'), nl,
     write('Silahkan tentukan banyaknya tentara yang menetap di wilayah: '), read(NewTroops),
-    valid_defending_troops(NewTroops, AttackingTroops).
+    valid_defending_troops(NewTroops, AttackingTroops,N).
 % print_current_status(StartRegion,TargetRegion) :-
 %     total_tentara(StartRegion, TentaraAU1),
 %     total_tentara(TargetRegion, TentaraAU2),
@@ -222,7 +230,7 @@ update_after_attack(Player1, Player2):-
         ); Total2 == 24 -> (
             write('********************\n*'),
             write(Name2), 
-            write(' telah menguasai dunia'),
+            write(' telah menguasai dunia'),    
             write('*\n********************')
         )
     ).
