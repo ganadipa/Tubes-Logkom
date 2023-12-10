@@ -13,6 +13,14 @@ draft(Region, Troops) :-
     player_name(Player, PlayerName),
     region_owner(Region, Owner),
     code(Region, Code),
+    !,
+    (
+        Troops < 0 -> (
+            write('Jumlah pasukan tidak boleh negatif.\n'),
+            fail
+        ) ; !
+    ),
+    !,
     (
         Player \= Owner -> (
             format('Player ~w tidak memiliki wilayah ~w.\n', [PlayerName, Code]),
@@ -20,6 +28,7 @@ draft(Region, Troops) :-
         ) ; !
     ),
     total_additional_troops(Player, TotalAdditionalTroops),
+    !,
     (
         Troops > TotalAdditionalTroops -> (
             format('Pasukan ~w tidak mencukupi.\n', [PlayerName]),
