@@ -105,8 +105,8 @@ battle(StartRegion, TargetRegion, AttackingTroops) :-
     write('Total: '), sum_list(OpponentDice, TotalOpponent), write(TotalOpponent), nl,
     compare_battle_results(TotalAttacking, TotalOpponent, StartRegion, TargetRegion, AttackingTroops).
 
-roll_dice(0, []).
-roll_dice(N, ,Player,[Die|Dice]) :-
+roll_dice(0,_, []).
+roll_dice(N,Player,[Die|Dice]) :-
     N > 0,
     disease_outbreak_effect(Player),  % Check for the disease_outbreak_effect
     Die = 1,
