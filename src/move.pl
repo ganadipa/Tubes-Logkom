@@ -120,8 +120,3 @@ move(X1, X2, Y) :-
 
 
 % /* Predikat untuk mencetak status saat ini */
-% print_current_status(X1,X2) :-
-%     total_troops(X1, TentaraAU1),
-%     total_troops(X2, TentaraAU2),
-%     write('Jumlah tentara di '), write(X1), write(': '), write(TentaraAU1), nl,
-%     write('Jumlah tentara di '), write(X2), write(': '), write(TentaraAU2), nl.
