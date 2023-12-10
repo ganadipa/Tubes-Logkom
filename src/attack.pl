@@ -112,7 +112,7 @@ roll_dice(N,Player,[Die|Dice]) :-
     Die = 1,
     % If in effect, set the die to 1
     M is N - 1,
-    roll_dice(M, Dice),!.
+    roll_dice(M, Player, Dice),!.
 
 roll_dice(N,Player, [Die|Dice]) :-
     N>0,
@@ -120,7 +120,7 @@ roll_dice(N,Player, [Die|Dice]) :-
     Die = 6,
       % If in effect, set the die to 6
     M is N - 1,
-    roll_dice(M, Dice),!.
+    roll_dice(M, Player, Dice),!.
 
 roll_dice(N,Player, [Die|Dice]) :-
     N > 0,  % If not in effect
@@ -128,7 +128,7 @@ roll_dice(N,Player, [Die|Dice]) :-
     Die is RandomNumber, 
      % Adjust the range to 1-6
     M is N - 1,
-    roll_dice(M, Dice),!.
+    roll_dice(M, Player, Dice),!.
 print_dice(Dice) :-
     forall(nth1(N, Dice, Die), (
         format('Dadu ~w: ~w~n', [N, Die])
