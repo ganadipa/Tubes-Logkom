@@ -117,17 +117,21 @@ roll_dice(N, [Die|Dice]) :-
     M is N - 1,
     roll_dice(M, Dice).
 roll_dice(N, [Die|Dice]) :-
+    N > 0,
     \+ super_soldier_serum_effect(current_player),  % If not in effect
     random(1,7, RandomNumber),  % Generate a random number between 0 and 5
     write('Dadu: '), write(RandomNumber), nl,
-    Die is RandomNumber + 1,  % Adjust the range to 1-6
+    Die is RandomNumber,  % Adjust the range to 1-6
     M is N - 1,
     roll_dice(M, Dice).
+
+
 
 
 compare_battle_results(AttackingTotal, OpponentTotal, StartRegion, TargetRegion, AttackingTroops) :-
     AttackingTotal > OpponentTotal,
     !,
+    write('hello1'),
     
     region_owner(StartRegion,Player),
     region_owner(TargetRegion,Opponent),
@@ -151,6 +155,7 @@ compare_battle_results(AttackingTotal, OpponentTotal, StartRegion, TargetRegion,
     /*sekalian tranfer kepemilikan.*/
     
 compare_battle_results(_, _, StartRegion, TargetRegion, AttackingTroops) :-
+    write('hello1'),
     region_owner(TargetRegion,Opponent),
     retract(total_troops(StartRegion,_)),
     total_troops(StartRegion,X),
