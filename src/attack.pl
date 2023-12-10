@@ -36,7 +36,7 @@ attack :-
 valid_start_region(Region, Player, Validated) :-
     (
         \+ region_owner(Region, Player) -> 
-            (write('Daerah tidak valid. Silahkan input kembali.'), nl,
+            (write('Daerah tidak valid (atau bukan milik anda). Silahkan input kembali.'), nl,
             write('Pilihlah daerah yang ingin Anda mulai untuk melakukan penyerangan: '), 
             read(NewRegion),
             valid_start_region(NewRegion, Player, NewValidated),
