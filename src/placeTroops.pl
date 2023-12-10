@@ -70,7 +70,7 @@ placeTroops(Region, TroopCount) :-
 
     (
         
-        ((Sum4) == 0)  -> (endTurn); true
+        ((Sum4) == 0)  -> (endTurn); next_player
     )
     .
 

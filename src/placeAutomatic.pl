@@ -58,9 +58,8 @@ placeAutomatic:-
 
     (
         
-        ((Sum4) == 0)  -> (endTurn); true
-    ),
-    next_player.
+        ((Sum4) == 0)  -> (endTurn); next_player
+    ).
 
 placeTroops_quietly(Region, TroopCount) :-
     current_player(Player),
