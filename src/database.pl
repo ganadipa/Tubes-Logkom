@@ -342,10 +342,27 @@ print_all_additional_troops([(Player, Troops)|T]) :-
 
 :- dynamic(has_risk_card/1).
 
-:- dynamic(isDisease/1).
-:- dynamic(has_risk_card/2).
+
 :- dynamic(casefire_order_effect/1).
 :- dynamic(super_soldier_serum_effect/1).
 :- dynamic(auxiliary_troops_effect/1).
 :- dynamic(disease_outbreak_effect/1).
 :- dynamic(supply_chain_issue_effect/1).
+
+erase_all_effect(Player):-
+    (
+        casefire_order_effect(Player) -> retract(casefire_order_effect(Player)); true
+    ),
+    (
+        super_soldier_serum_effect(Player) -> retract(super_soldier_serum_effect(Player)); true
+    ),
+    (
+        auxiliary_troops_effect(Player) -> retract(auxiliary_troops_effect(Player)); true
+    ),
+    (
+        disease_outbreak_effect(Player) -> retract(disease_outbreak_effect(Player)); true
+    ),
+    (
+        supply_chain_issue_effect(Player) -> retract(supply_chain_issue_effect(Player)); true
+    ).
+    

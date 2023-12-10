@@ -49,7 +49,7 @@ code_validator(Code, String):-
 
 print_players_info:-
     write('\n\nPLAYER TURN DETAILS:\n'),
-    print_players_info_helper.
+    \+ print_players_info_helper.
 
 print_players_info_helper :-
     player_name(Player, Name),

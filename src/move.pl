@@ -1,4 +1,7 @@
 move(X1, X2, Y) :-
+    int_validator(1,99999,Y, 'Harus positif.'),
+    code_validator(X1, 'Kode tidak dikenali.'),
+    code_validator(X2, 'Kode tidak dikenali.'),
     move_count(N),
     !,
     (

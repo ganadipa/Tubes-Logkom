@@ -9,7 +9,13 @@ endTurn :-
     player_name(NewPlayer, NewPlayerName),
     format('Sekarang giliran Player ~w!\n', [NewPlayerName]),
     region_owned_length(NewPlayer, TotalRegion),
-    retract(has_risk_card(OldPlayer)),
+    (
+        has_risk_card(NewPlayer) -> (
+            retract(has_risk_card(NewPlayer))
+            )
+            ; true
+    ),
+    erase_all_effect(NewPlayer),
     region_owner(na1, ONA1),
     region_owner(na2, ONA2),
     region_owner(na3, ONA3),
