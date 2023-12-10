@@ -31,4 +31,5 @@
 % Other
 
 :- initialization(consult('next_player.pl')).
+:- initialization(consult('utils.pl')).
 

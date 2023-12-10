@@ -102,11 +102,11 @@ battle(StartRegion, TargetRegion, AttackingTroops) :-
     region_owner(TargetRegion,Opponent),
     write('Perang telah dimulai.'), nl,
     write('Player '), write(Player), nl,
-    write('Dadu: '), roll_dice(AttackingTroops, AttackingDice),
+    roll_dice(AttackingTroops, AttackingDice),
     write('Total: '), sum_list(AttackingDice, TotalAttacking), write(TotalAttacking), nl,
     write('Player '), write(Opponent), nl,
     total_troops(TargetRegion,OpponentTroops),
-    write('Dadu: '), roll_dice(OpponentTroops, OpponentDice),
+    roll_dice(OpponentTroops, OpponentDice),
     write('Total: '), sum_list(OpponentDice, TotalOpponent), write(TotalOpponent), nl,
     compare_battle_results(TotalAttacking, TotalOpponent, StartRegion, TargetRegion, AttackingTroops).
 
@@ -119,6 +119,7 @@ roll_dice(N, [Die|Dice]) :-
 roll_dice(N, [Die|Dice]) :-
     \+ super_soldier_serum_effect(current_player),  % If not in effect
     random(1,7, RandomNumber),  % Generate a random number between 0 and 5
+    write('Dadu: '), write(RandomNumber), nl,
     Die is RandomNumber + 1,  % Adjust the range to 1-6
     M is N - 1,
     roll_dice(M, Dice).
